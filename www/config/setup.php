@@ -21,11 +21,11 @@
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "CREATE TABLE `user` (
             `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            `username` NVARCHAR(25) NOT NULL,
-            `password` NVARCHAR(255) NOT NULL,
-            `email` NVARCHAR(100) NOT NULL,
+            `username` VARCHAR(25) NOT NULL,
+            `password` VARCHAR(255) NOT NULL,
+            `email` VARCHAR(100) NOT NULL,
             `token` VARCHAR(32) NOT NULL,
-            `verified` TINYINT(1) NOT NULL DEFAULT 0,
+            `verified` TINYINT(2) NOT NULL DEFAULT 0,
             `picturesource` LONGTEXT
             )";
         $dbh->exec($sql);
@@ -79,7 +79,7 @@
             `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `userid` INT NOT NULL,
             `imageid` INT NOT NULL,
-            `text` NVARCHAR(2000) NOT NULL,
+            `text` VARCHAR(2000) NOT NULL,
             FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE,
             FOREIGN KEY (imageid) REFERENCES image(id) ON DELETE CASCADE
             )";
