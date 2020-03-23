@@ -9,8 +9,7 @@ class Router
         $parameter = '';
         if(!empty($_SERVER['REQUEST_URI']))
             $routes = explode('/', trim($_SERVER['REQUEST_URI']));
-        else
-            ErrorPage404();
+        
         
         // получаем имя контроллера
         if ( !empty($routes[1]) )
