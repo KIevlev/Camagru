@@ -2,7 +2,7 @@
     // kborroq's database settings
      $DB_NAME = "cam_db";
      $DB_DSN = "mysql:host=mysql;dbname=".$DB_NAME;
-     $DB_DSN_LIGHT = "mysql:host=mysql;charset=".$DB_CHARSET;
+     $DB_DSN_LIGHT = "mysql:host=mysql";
      $DB_USER = "root";
      $DB_PASSWORD = "secret";
      $DB_CHARSET = "utf8";
