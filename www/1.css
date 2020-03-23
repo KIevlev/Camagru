@@ -1,0 +1,29 @@
+* {
+			margin: 0;
+			padding: 0;
+		}
+		body, html {
+			height: 100%;
+			background: #34495e;
+		}
+		.wrapper {
+			display: flex;
+			flex-direction: column;
+			min-width: 100%;
+			min-height: 100%;
+			margin: 0 auto;
+			background: #34495e;
+		}
+		.content {
+			flex: 1 0 auto;
+		}
+		h1 {
+			padding: 40px 20px 30px;
+		}
+
+		a {
+			color: #3498DB;
+		}
+		.footer {
+			flex: 0 0 auto;
+		}
