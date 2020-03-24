@@ -25,12 +25,10 @@
 								</p>
 							</div>
 							<div class="col-4">
-								<div><a href="https://github.com/KIevlev/Roger" class="button" target="_blank">Hithub link</a></div>
+								<div><a href="https://github.com/KIevlev/Camagru" class="button" target="_blank">Hithub link</a></div>
 							</div>
 						</div>	
 					</div>
-		
 			</div>
-		
-		</div><!-- .wrapper -->
+		</div>
 		
