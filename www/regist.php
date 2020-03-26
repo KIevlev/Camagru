@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'templates/header.php';
-require "functions/verifyLoginDetails.php";
+//require "functions/verifyLoginDetails.php";
 
 $error = "";
 

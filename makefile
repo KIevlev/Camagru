@@ -12,11 +12,11 @@ stop: #Stop
 show_containers:
 	@sudo docker ps
 
-connect_php:
+php:
 	@sudo docker exec -it $(docker_php) bash
 
-connect_nginx:
+nginx:
 	@sudo docker exec -it $(docker_nginx) bash
 
-connect_mysql:
+mysql:
 	@sudo docker exec -it $(docker_mysql) bash
