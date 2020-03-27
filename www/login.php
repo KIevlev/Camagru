@@ -53,7 +53,7 @@ if(isset($_POST['submit'])){
 <input type="TEXT" name="username" placeholder="Username" required/>
 <input type="PASSWORD" name="password" placeholder="Password" required/>
 <input type="SUBMIT" name="submit" value="Login" />
-<a class="add" href='#'> forgot your password?</a>
+<a class="add" href='forgot.php'> forgot your password?</a>
 <a class="add" href='regist.php'>sign in now!</a>
 
 </form>
