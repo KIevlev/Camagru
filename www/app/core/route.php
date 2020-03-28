@@ -11,7 +11,6 @@ class Route
 
     static function start()
     {
-
         // контроллер и действие по умолчанию
         $controller_name = 'Main';
         $action_name = 'index';
@@ -46,7 +45,6 @@ class Route
         $action_name = 'action_'.$action_name;
 
         // подцепляем файл с классом модели (файла модели может и не быть)
-
         $model_file = strtolower($model_name).'.php';
         $model_path = "app/models/".$model_file;
         if(file_exists($model_path))
@@ -59,7 +57,7 @@ class Route
         $controller_path = "app/controllers/".$controller_file;
         if(file_exists($controller_path))
         {
-            include "app/controllers/".$controller_file;
+            require $controller_path;
         }
         else
         {
@@ -101,6 +99,7 @@ class Route
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>404 :(</title>
 	<link rel="stylesheet" type="text/css" href="style/404.css">
 </head>

@@ -82,7 +82,7 @@ i {
 
 .nav_links li a{
 	color: white;
-	transition: all 0.3s ease 0s;
+	transition: all .5s ease;
 }
 
 .nav_links li a:hover {
@@ -145,9 +145,12 @@ width: 75%;
 	transition: 0.25s;
 	cursor: pointer;
 }
+.box input[type = "submit"]{
+	transition: all .5s ease;
+}
 .box input[type = "submit"]:hover{
 	background: #2ecc71;
-	transition: 0.3s;
+	
 }
 
 .add{
@@ -282,6 +285,7 @@ p.footer__social-icons a {
 	color: #fff;
 	text-decoration: none;
 	margin-right: 30px;
+	transition: all .5s ease;
 }
 
 p.footer__social-icons a:last-child {
@@ -290,7 +294,7 @@ p.footer__social-icons a:last-child {
 
 p.footer__social-icons a:hover {
 	color: #3498db;
-	transition: 0.25s;
+	
 }
 
 .button {
@@ -312,10 +316,11 @@ p.footer__social-icons a:hover {
 	margin-top: 20px;
 	margin-right: 0;
 	margin-left: 20%;
+	transition: all .5s ease;
 }
 
 .button:hover{
 	color: #3498db;
 	border-color: #3498db;
-	transition: 0.25s;
+	
 }

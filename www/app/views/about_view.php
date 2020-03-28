@@ -15,7 +15,7 @@ require_once 'templates/header.php';
  <style>
  .wrapper_1{
 background: #c7b39b url(images/var5.jpg); /* Цвет фона и путь к файлу */
-color: #fff; /* Цвет текста */
+color: #fff;
 height: 88%;
 } 
 </style>

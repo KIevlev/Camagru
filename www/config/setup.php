@@ -39,6 +39,7 @@ require "database.php";
             `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `userid` INT UNSIGNED NOT NULL,
             `source` LONGTEXT NOT NULL,
+            `description` VARCHAR(250) DEFAULT NULL,
             `creationdate` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
             FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE
             )";

@@ -1,6 +1,7 @@
 <?php
 class Model
 {
+	const SUCCESS1				=-1;
     const SUCCESS				= 0;
     const DB_ERROR				= 1;
     const USER_EXIST			= 2;
@@ -21,21 +22,21 @@ class Model
     const REASON_CREATE			= 100;
     const REASON_FORGOTTEN		= 101;
 
-    private $sql_read = "SELECT * FROM users WHERE nickname = :nickname AND id = :uid AND password = :password";
+    private $sql_read = "SELECT * FROM user WHERE username = :username AND id = :uid AND password = :password";
 
     protected function _auth()
 	{
-		if (!(isset($_SESSION['nickname']) and isset($_SESSION['uid']) and isset($_SESSION['password'])))
-			return Model::INCORRECT_NICK_PASS;
-		include "config/database.php";
+		//if (!(isset($_SESSION['username']) and isset($_SESSION['uid']) and isset($_SESSION['password'])))
+		//	return Model::INCORRECT_NICK_PASS;
+		require "config/database.php";
 		try
 		{
-			$pdo = new PDO($dsn, $db_user, $db_pass, $opt);
-			$pdo->exec("USE $db");
+			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASS, $DB_OPTS);
+			$pdo->exec("USE $DB_NAME");
 			$stmt = $pdo->prepare($this->sql_read);
 			$stmt->execute(array(
-				'nickname' => $_SESSION['nickname'],
-				'uid' => $_SESSION['uid'],
+				'username' => $_SESSION['username'],
+				'id' => $_SESSION['uid'],
 				'password' => $_SESSION['password']
 			));
 			$data = $stmt->fetch();
