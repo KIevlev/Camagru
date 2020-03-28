@@ -13,7 +13,6 @@ class Controller_Signup extends Controller
         $this->view->generate("signup_view.php", Controller::$template, $param);
     }
 
-
     public function action_create()
     {
         if (!(isset($_POST['username']) and isset($_POST['email']) and isset($_POST['password']))) {

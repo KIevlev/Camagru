@@ -23,7 +23,8 @@ class Model_Signup extends Model
 		{
 			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
-			$arr = array('username' => $username, 'password' => hash("whirlpool", $passwd), 'email' => $email, 'token' => Model_Signup::token());
+			$token = Model_Signup::token();
+			$arr = array('username' => $username, 'password' => hash("whirlpool", $passwd), 'email' => $email, 'token' => $token);
 			if ($this->_check($pdo, $arr))
 				return self::USER_EXIST;
 			switch ($this->_check($pdo, $arr))
@@ -33,16 +34,20 @@ class Model_Signup extends Model
 				case Model::USER_EXIST:
 					return Model::USER_EXIST;
 				case Model::SUCCESS:
+				break;
 			}
-			if ($this->_write_to_db($pdo, Model_Signup::$sql_write_db, $arr) === Model::SUCCESS
-				and $this->_add_to_change($arr, $pdo) === Model::SUCCESS)
+			if ($this->_write_to_db($pdo, Model_Signup::$sql_write_db, $arr) === Model::SUCCESS)
+			{
+				$this->_send_mail($email, $token);
 				return Model::SUCCESS;
+			}
+				
 			else
-				return Model::DB_ERROR;
+				return Model::DB_ERROR1;
 		}
 		catch (PDOException $ex)
 		{
-			return Model::DB_ERROR;
+			return Model::DB_ERROR1;
 		}
     }
 
@@ -63,7 +68,7 @@ class Model_Signup extends Model
 		}
 		catch (PDOException $ex)
 		{
-			Model::DB_ERROR;
+			Model::DB_ERROR1;
 		}
     }
 
@@ -74,10 +79,7 @@ class Model_Signup extends Model
 			$stmt->execute($arr);
 			$id = $stmt->fetch();
 			$stmt = $pdo->prepare(self::$sql_add_to_change);
-			$fd = fopen("/dev/urandom", "r");
-			$salt = fread($fd, 30);
-			fclose($fd);
-			$sid = hash("whirlpool", $arr['email'] . $salt);
+			$sid = hash("whirlpool", $arr['email'].time());
 			$arr2 = array('id' => $id['id'], 'reason' => Model::REASON_CREATE, 'sid' => $sid);
 			$stmt->execute($arr2);
 			$this->_send_mail($arr['email'], $sid);
@@ -99,7 +101,7 @@ class Model_Signup extends Model
 		}
 		catch (PDOException $ex)
 		{
-			return Model::DB_ERROR;
+			return Model::DB_ERROR1;
 		}
     }
 
@@ -110,9 +112,12 @@ class Model_Signup extends Model
         $main = "Thank you for registering on our site. To confirm your entry, follow this link: http://".
             $email_host."/auth/confirm/".$sid;
         $main = wordwrap($main, 60, "\r\n");
-        $headers = 'From: camagru_kborroq'."\r\n".
+        $headers = 'From: camagru_kborroq@localhost'."\r\n".
                   //  "Reply-To: kostya.marinenkov@gmail.com"."\r\n".
                     "X-Mailer: PHP/".phpversion();
-        mail($email, $subject, $main, $headers);
+		if (!mail($email, $subject, $main, $headers))
+		{
+			return Model::DB_ERROR1;
+		}
     }
 }

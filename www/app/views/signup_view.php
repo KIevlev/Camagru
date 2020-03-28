@@ -1,4 +1,5 @@
 <?php
+
 if ($data === Model::USER_EXIST)
 {
 	echo <<<SUC
@@ -14,6 +15,15 @@ elseif ($data === Model::DB_ERROR)
 	<br><br><br><br><br><br>
 	<p style="text-align: center; font-size: larger">
 	Sorry, we have some problem with database. Please stand by.
+	</p>
+SUC;
+}
+elseif ($data === Model::DB_ERROR1)
+{
+	echo <<<SUC
+	<br><br><br><br><br><br>
+	<p style="text-align: center; font-size: larger">
+	AAAAAAAAAAAAAAAAAAAAAa
 	</p>
 SUC;
 }
@@ -34,7 +44,7 @@ else
 	echo <<<SIGNIN
 				<div class="wrapper">
 				<div class="content">
-			<form class="box" action="/signup/create" method="POST">
+				<form class="box" action="/signup/create" method="POST">
 				<h1>Registration page</h1>
 				<input type="text" name="username" placeholder="Username" required>
 				<input type="email" name="email" placeholder="example@mail.com" required> 
