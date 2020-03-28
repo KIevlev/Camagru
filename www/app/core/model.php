@@ -1,7 +1,6 @@
 <?php
 class Model
 {
-	const SUCCESS1				=-1;
     const SUCCESS				= 0;
     const DB_ERROR				= 1;
     const USER_EXIST			= 2;
@@ -17,7 +16,8 @@ class Model
     const LIKE_EXIST			= 12;
     const EMAIL_EXIST			= 13;
     const WRONG_PASSWORD		= 14;
-    const EMPTY_PROFILE			= 15;
+	const EMPTY_PROFILE			= 15;
+	const PASS_DIFF				= 16;
 
     const REASON_CREATE			= 100;
     const REASON_FORGOTTEN		= 101;
@@ -26,8 +26,8 @@ class Model
 
     protected function _auth()
 	{
-		//if (!(isset($_SESSION['username']) and isset($_SESSION['uid']) and isset($_SESSION['password'])))
-		//	return Model::INCORRECT_NICK_PASS;
+		if (!(isset($_SESSION['username']) and isset($_SESSION['uid']) and isset($_SESSION['password'])))
+			return Model::INCORRECT_NICK_PASS;
 		require "config/database.php";
 		try
 		{

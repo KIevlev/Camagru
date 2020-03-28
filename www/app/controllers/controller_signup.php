@@ -16,7 +16,7 @@ class Controller_Signup extends Controller
 
     public function action_create()
     {
-        if (!(isset($_POST['nickname']) and isset($_POST['email']) and isset($_POST['password']))) {
+        if (!(isset($_POST['username']) and isset($_POST['email']) and isset($_POST['password']))) {
             $this->action_index(Model::INCOMPLETE_DATA);
             return ;
         }
@@ -24,7 +24,12 @@ class Controller_Signup extends Controller
             $this->action_index(Model::BAD_EMAIL);
             return ;
         }
-            $result = $this->model->create_account($_POST['nickname'], $_POST['password'], $_POST['email']);
+        if ($_POST['password'] != $_POST['pass2'])
+        {
+            $this->action_index(Model::PASS_DIFF);
+            return ; 
+        }
+            $result = $this->model->create_account($_POST['username'], $_POST['password'], $_POST['email']);
         switch ($result) {
             case Model::USER_EXIST:
                 $this->view->generate(Controller_Signup::$view_page, Controller::$template,

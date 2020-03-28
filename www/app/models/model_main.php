@@ -44,10 +44,6 @@ class Model_Main extends Model
 			{
 				return Model::DB_ERROR;
 			}
-		/*	
-			
-			
-			*/
     }
 
     public function get_profile($id)
