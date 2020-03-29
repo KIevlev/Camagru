@@ -6,12 +6,12 @@ class Model_Signup extends Model
                     VALUES (NULL, :username, :password, :email, :token, 0)";
     private static $sql_add_to_change = "INSERT INTO `change_table` (`id`, `id_user`, `reason`, `sid`)
                     VALUES (NULL, :id, :reason, :sid)";
-    private static $sql_get_id = "SELECT `id` FROM `user` WHERE `email` = :email AND username = :username
+    private static $sql_get_id = "SELECT `id` FROM `user` WHERE `email` = :email AND `username` = :username
                                     AND password = :password";
 
 	public static function token()
 	{
-		return bin2hex(random_bytes(32));
+		return bin2hex(random_bytes(10));
 	}
 
     public function create_account($username, $passwd, $email)
@@ -36,14 +36,15 @@ class Model_Signup extends Model
 				case Model::SUCCESS:
 				break;
 			}
-			if ($this->_write_to_db($pdo, Model_Signup::$sql_write_db, $arr) === Model::SUCCESS)
+			
+			
+		if ($this->_write_to_db($pdo, Model_Signup::$sql_write_db, $arr) === Model::SUCCESS)
 			{
 				$this->_send_mail($email, $token);
 				return Model::SUCCESS;
 			}
-				
 			else
-				return Model::DB_ERROR1;
+				return Model::DB_ERROR2;
 		}
 		catch (PDOException $ex)
 		{
@@ -101,23 +102,34 @@ class Model_Signup extends Model
 		}
 		catch (PDOException $ex)
 		{
+			echo "ERROR \n".$ex->getMessage()."\nAborting process\n";
 			return Model::DB_ERROR1;
 		}
     }
 
     private function _send_mail($email, $sid)
     {
-    	include 'config/database.php';
-        $subject = "Welcome to Camagru!";
+		$subject = "Welcome to Camagru!";
+		$msg = "Thank you for registering on our site. To confirm your entry, follow this link: http://localhost:8080/auth/confirm/".$sid;
+
+// use wordwrap() if lines are longer than 70 characters
+$msg = wordwrap($msg,70);
+
+// send email
+mail($email,$subject,$msg);
+/*
+    	require 'config/database.php';
+        
         $main = "Thank you for registering on our site. To confirm your entry, follow this link: http://".
             $email_host."/auth/confirm/".$sid;
         $main = wordwrap($main, 60, "\r\n");
         $headers = 'From: camagru_kborroq@localhost'."\r\n".
                   //  "Reply-To: kostya.marinenkov@gmail.com"."\r\n".
                     "X-Mailer: PHP/".phpversion();
-		if (!mail($email, $subject, $main, $headers))
+		if (!mail($email, $subject, $main))
 		{
 			return Model::DB_ERROR1;
 		}
-    }
+    }*/
+}
 }

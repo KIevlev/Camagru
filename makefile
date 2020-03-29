@@ -15,7 +15,7 @@ show_containers:
 php:
 	@sudo docker exec -it $(docker_php) bash
 
-nginx:
+nginx1:
 	@sudo docker exec -it $(docker_nginx) bash
 
 mysql:

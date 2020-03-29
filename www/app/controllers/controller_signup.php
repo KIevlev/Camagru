@@ -44,7 +44,14 @@ class Controller_Signup extends Controller
                 break;
 			case Model::WEAK_PASSWORD:
 				$this->view->generate(Controller_Signup::$view_page, Controller::$template,
-					Model::WEAK_PASSWORD);
+                    Model::WEAK_PASSWORD);
+            case Model::DB_ERROR1:
+                $this->view->generate(Controller_Signup::$view_page, Controller::$template,
+                    Model::DB_ERROR1);
+            break;
+            case Model::DB_ERROR2:
+                $this->view->generate(Controller_Signup::$view_page, Controller::$template,
+                    Model::DB_ERROR2);
         }
     }
 }
