@@ -379,3 +379,5 @@
 2020/03/29 15:10:49 [error] 6#6: *4 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
 2020/03/29 16:01:37 [error] 6#6: *1 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
 2020/03/29 16:19:37 [error] 6#6: *5 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
+2020/03/29 21:41:00 [error] 6#6: *3 open() "/var/www/signup/style/style.css" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /signup/style/style.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/signup/create"
+2020/03/29 21:41:37 [error] 6#6: *3 open() "/var/www/auth/confirm/style/404.css" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /auth/confirm/style/404.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/auth/confirm/cd02f14158b7ca62a217"
