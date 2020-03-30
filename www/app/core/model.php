@@ -19,6 +19,7 @@ class Model
 	const EMPTY_PROFILE			= 15;
 	const PASS_DIFF				= 16;
 	const ALREADY_C				= 17;
+	const SAME_PASS				= 18;
 
     const REASON_CREATE			= 100;
     const REASON_FORGOTTEN		= 101;

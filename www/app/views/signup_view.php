@@ -59,7 +59,6 @@ else
 				<input type="email" name="email" placeholder="example@mail.com" required> 
 				<input type="password" name="password" placeholder="Password" required>
 				<input type="password" name="pass2" placeholder="Password once more" required>
-
 SIGNIN;
 			if ($data === Model::INCOMPLETE_DATA)
 				echo "<p style='color: darkred; font-style: italic'>Please, enter login, e-mail and password</p>";
