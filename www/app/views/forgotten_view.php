@@ -23,6 +23,15 @@ elseif ($data === Model::DB_ERROR)
 	</p>
 SUC;
 }
+elseif ($data === Model::SID_NOT_FOUND)
+{
+	echo <<<SUC
+	<br><br><br><br><br><br>
+	<p style="text-align: center; font-size: larger">
+	your link is invalid :(
+	</p>
+SUC;
+}
 elseif ($data === Model::SAME_PASS)
 {
 	echo <<<SIGNIN

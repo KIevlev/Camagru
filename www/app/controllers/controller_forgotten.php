@@ -23,8 +23,15 @@ class Controller_Forgotten extends Controller
 	public function action_recovery($param)
 	{
 		if (!isset($_POST['new_password']))
-			$this->view->generate(Controller_Forgotten::$view_page, Controller::$template,
+		{
+			$result = $this->model->_check_sid($param);
+			if ($result === Model::SID_NOT_FOUND)
+				$this->view->generate(Controller_Forgotten::$view_page, Controller::$template,
+					$result);
+			else
+				$this->view->generate(Controller_Forgotten::$view_page, Controller::$template,
 				array(Model::WRONG_PASSWORD, $param));
+		}
 		else
 		{
 			$result = $this->model->new_password($param);

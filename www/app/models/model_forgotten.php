@@ -24,6 +24,7 @@ class Model_Forgotten extends Model
 		{
 			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
+			$uid = $data['uid'];
 			$token = Model::token();
 			$stmt = $pdo->prepare(self::$sql_update_pw);
 			if ($stmt->execute(array($password, $token, $uid)))
@@ -37,7 +38,7 @@ class Model_Forgotten extends Model
 		}
 	}
 
-	private function _check_sid($sid)
+	public function _check_sid($sid)
 	{
 		include "config/database.php";
 		try
