@@ -34,16 +34,17 @@ else
 		echo <<<SIGNIN
 		<div class="wrapper">
 		<div class="content">
-	<form class="box" method="POST">
+	<form class="box" action="/auth/signin" method="POST">
 	<h1>Login</h1>
 	<input type="TEXT" name="username" placeholder="Username" required/>
 	<input type="PASSWORD" name="password" placeholder="Password" required/>
 	<input type="SUBMIT" name="submit" value="Login" />
 	<a class="add" href='/forgotten'> forgot your password?</a>
-	<a class="add" href='/signup'>sign in now!</a>
-	</form>
-	</div>
+	<a class="add" href='/signup'>sign up now!</a>
+	
 SIGNIN;
-		if ($data === Model::INCORRECT_NICK_PASS)
-			echo "<p style='color: darkred; font-style: italic'>Incorrect login or password</p>";
+if ($data === Model::INCORRECT_NICK_PASS)
+			echo "<br /><p style='color: darkred; font-style: italic'>Incorrect login or password</p>";
+	echo "</form>
+			</div>";
 }

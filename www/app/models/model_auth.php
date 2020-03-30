@@ -14,7 +14,7 @@ class Model_Auth extends Model
 		{
 			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
-			$sql = "SELECT * FROM `user` WHERE username = ? AND password = ?";
+			$sql = "SELECT * FROM `user` WHERE `username` = ? AND `password` = ?";
 			$stmt = $pdo->prepare($sql);
 			$stmt->execute(array($login, $hash_passwd));
 			$data = $stmt->fetch();

@@ -24,10 +24,10 @@
                 echo "<li><a href='/signup'><div class='navi'>Sign Up</div></a></li>";
             }
         else {
-			echo "<a href='/add'><div class='navi'>Add</div></a>";
-            echo "<a href='/main/profile/{$_SESSION['uid']}'><div id='user' class='navi'>{$_SESSION['username']}</div></a>";
-            echo "<a href='/settings'><div class='navi'>Settings</div></a>";
-            echo "<a href='/auth/signout'><div class='navi'>Sign Out</div></a>";
+			echo "<li><a href='/add'><div class='navi'>Add</div></a></li>";
+            echo "<li><a href='/main/profile/{$_SESSION['uid']}'><div id='user' class='navi'>{$_SESSION['username']}</div></a></li>";
+            echo "<li><a href='/settings'><div class='navi'>Settings</div></a></li>";
+            echo "<li><a href='/auth/signout'><div class='navi'>Sign Out</div></a></li>";
         }
 ?>
 			</ul>
