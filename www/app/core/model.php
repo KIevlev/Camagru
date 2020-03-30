@@ -20,6 +20,7 @@ class Model
 	const PASS_DIFF				= 16;
 	const ALREADY_C				= 17;
 	const SAME_PASS				= 18;
+	const PASS_NOT_MATCH		= 19;
 
     const REASON_CREATE			= 100;
     const REASON_FORGOTTEN		= 101;

@@ -70,6 +70,22 @@ elseif ($data === Model::WEAK_PASSWORD)
 	</div>
 SIGNIN;
 }
+elseif ($data === Model::PASS_NOT_MATCH)
+{
+	echo <<<SIGNIN
+	<div class="wrapper">
+		<div class="content">
+	<p>Enter new password</p>
+	<form class="box" action="/forgotten/recovery/{$data[1]}" method="post">
+		<input  type="password" placeholder="New Password" name="new_password" required="required">
+		<input  type="password" placeholder="Confirm Password" name="confirm_password" required="required">
+		<input type="SUBMIT" name="submit" value="Sign in" />
+		<p style='color: darkred; font-style: italic'>passwords don't match</p>
+	</form>
+	</div>
+	</div>
+SIGNIN;
+}
 elseif ($data === Model::SUCCESS)
 {
 	echo <<<SUC
@@ -81,6 +97,22 @@ elseif ($data === Model::SUCCESS)
 		<p>return to main page</p>
 	</a>
 SUC;
+}
+elseif ($data === Model::BAD_EMAIL)
+{
+	echo <<<SIGNIN
+<div class="wrapper">
+<div class="content">
+	
+	<form class="box" action="/forgotten/check_email" method="post">
+	<h1>Please, enter your E-Mail</h1>
+		<input  type="email" placeholder="E-Mail" name="email" required="required">
+		<input type="submit" name="submit" value="Send link">
+		<p style='color: darkred; font-style: italic'>There is no such email in database</p>
+</form>
+	</div>
+	</div>
+SIGNIN;
 }
 else
 echo <<<SIGNIN

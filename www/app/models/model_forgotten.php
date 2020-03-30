@@ -13,13 +13,12 @@ class Model_Forgotten extends Model
 		if ("array" != $result)
 			return $data;
 		if ($_POST['confirm_password'] != $_POST['new_password'])
-			return FALSE;
+			return Model::PASS_NOT_MATCH;
 		if ($_POST['new_password'] === strtolower($_POST['new_password']) or strlen($_POST['new_password']) < 6)
 			return Model::WEAK_PASSWORD;
 			$password = hash('whirlpool', $_POST['new_password']);
 		if ($password === $data['passwd'])
 			return Model::SAME_PASS;
-		$uid = $data['uid'];
 		include "config/database.php";
 		try
 		{
@@ -46,8 +45,7 @@ class Model_Forgotten extends Model
 			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
 			$stmt = $pdo->prepare(self::$sql_check_sid);
-			$arr = array('sid' => $sid);
-			$stmt->execute($arr);
+			$stmt->execute(array('sid' => $sid));
 			$data = $stmt->fetch();
 			if (!$data)
 				return Model::SID_NOT_FOUND;
