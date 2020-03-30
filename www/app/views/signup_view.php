@@ -1,5 +1,5 @@
 <?php
-
+/*
 if ($data === Model::USER_EXIST)
 {
 	echo <<<SUC
@@ -8,8 +8,8 @@ if ($data === Model::USER_EXIST)
 	An account with this email or login has already been created  
 	</p>
 SUC;
-}
-elseif ($data === Model::DB_ERROR)
+}*/
+if ($data === Model::DB_ERROR)
 {
 	echo <<<SUC
 	<br><br><br><br><br><br>
@@ -18,7 +18,7 @@ elseif ($data === Model::DB_ERROR)
 	</p>
 SUC;
 }
-elseif ($data === Model::DB_ERROR1)
+/*elseif ($data === Model::DB_ERROR1)
 {
 	echo <<<SUC
 	<br><br><br><br><br><br>
@@ -35,7 +35,7 @@ elseif ($data === Model::DB_ERROR2)
 	BBBBBBBBBBBBBBBBB
 	</p>
 SUC;
-}
+}*/
 elseif ($data === Model::SUCCESS)
 {
 	echo <<<SUC
@@ -70,6 +70,10 @@ SIGNIN;
 																	7 characters with upper case symbol</p>";
 			elseif ($data === Model::PASS_DIFF)
 				echo "<p style='color: darkred; font-style: italic'>passwords don't match</p>";
+			elseif ($data === Model::USER_EXIST)
+				echo "<p style='color: darkred; font-style: italic'> An account with this login has been already created</p>";
+			elseif ($data === Model::EMAIL_EXIST)
+				echo "<p style='color: darkred; font-style: italic'> An account with this email has been already created</p>";
 			echo <<<SIGNIN
 				<p><input type="submit" name="submit" value="Sign In"></p>
 			</form>

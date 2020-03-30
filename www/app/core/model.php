@@ -1,8 +1,6 @@
 <?php
 class Model
 {
-	const DB_ERROR2				= -2;
-	const DB_ERROR1				= -1;
     const SUCCESS				= 0;
     const DB_ERROR				= 1;
     const USER_EXIST			= 2;

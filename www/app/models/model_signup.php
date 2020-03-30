@@ -11,7 +11,7 @@ class Model_Signup extends Model
 
 	public static function token()
 	{
-		return bin2hex(random_bytes(10));
+		return bin2hex(random_bytes(16));
 	}
 
     public function create_account($username, $passwd, $email)
@@ -25,51 +25,60 @@ class Model_Signup extends Model
 			$pdo->exec("USE $DB_NAME");
 			$token = Model_Signup::token();
 			$arr = array('username' => $username, 'password' => hash("whirlpool", $passwd), 'email' => $email, 'token' => $token);
-			if ($this->_check($pdo, $arr))
-				return self::USER_EXIST;
-			switch ($this->_check($pdo, $arr))
+			$arr2 = array('username' => $username, 'email' => $email);
+			if ($this->_check($pdo, $arr2))
+			return self::USER_EXIST;
+			switch ($this->_check($pdo, $arr2))
 			{
 				case Model::DB_ERROR:
 					return Model::DB_ERROR;
+				break;
 				case Model::USER_EXIST:
 					return Model::USER_EXIST;
+				break;
 				case Model::SUCCESS:
 				break;
 			}
-			
-			
 		if ($this->_write_to_db($pdo, Model_Signup::$sql_write_db, $arr) === Model::SUCCESS)
 			{
 				$this->_send_mail($email, $token);
 				return Model::SUCCESS;
 			}
 			else
-				return Model::DB_ERROR2;
+				return Model::DB_ERROR;
 		}
 		catch (PDOException $ex)
 		{
-			return Model::DB_ERROR1;
+			return Model::DB_ERROR;
 		}
     }
 
-    private function _check($pdo, $arr)
+    private function _check($pdo, $arr2)
     {
-        unset($arr['password']);
+        //unset($arr['password']);
         try
 		{
 			$stmt = $pdo->prepare(self::$sql_check);
-			$stmt->execute($arr);
+			$stmt->execute($arr2);
 			$result = $stmt->fetchAll();
 			foreach ($result as $r)
 			{
-				if ($r['email'] == $arr['email'] or $r['username'] == $arr['username'])
+				if ($r['email'] == $arr2['email'])
+				{
+					Route::console_log($r['email']. " arr2 email - ". $arr2['email']);
+					return Model::EMAIL_EXIST;
+				}
+				elseif ($r['username'] == $arr2['username'])
+				{
+					Route::console_log($r['username']. " arr2 us- ". $arr2['username']);
 					return Model::USER_EXIST;
+				}
 			}
 			return Model::SUCCESS;
 		}
 		catch (PDOException $ex)
 		{
-			Model::DB_ERROR1;
+			Model::DB_ERROR;
 		}
     }
 
@@ -102,34 +111,37 @@ class Model_Signup extends Model
 		}
 		catch (PDOException $ex)
 		{
-			echo "ERROR \n".$ex->getMessage()."\nAborting process\n";
-			return Model::DB_ERROR1;
+			return Model::DB_ERROR;
 		}
     }
 
     private function _send_mail($email, $sid)
     {
 		$subject = "Welcome to Camagru!";
-		$msg = "Thank you for registering on our site. To confirm your entry, follow this link: http://localhost:8080/auth/confirm/".$sid;
-
-// use wordwrap() if lines are longer than 70 characters
-$msg = wordwrap($msg,70);
-
+$msg = '<html>
+<head>
+  <title>Welcome to Camagru</title>
+</head>
+<body>
+  <p>Thank you for registering on our site!</p>
+  <p> To confirm your entry, follow this<p>
+  <p><a href="http://localhost:8080/auth/confirm/">LINK</a></p>
+</body>
+</html>';
+$msg = wordwrap($msg,70, "\r\n");
 // send email
 mail($email,$subject,$msg);
-/*
-    	require 'config/database.php';
-        
-        $main = "Thank you for registering on our site. To confirm your entry, follow this link: http://".
-            $email_host."/auth/confirm/".$sid;
-        $main = wordwrap($main, 60, "\r\n");
-        $headers = 'From: camagru_kborroq@localhost'."\r\n".
-                  //  "Reply-To: kostya.marinenkov@gmail.com"."\r\n".
-                    "X-Mailer: PHP/".phpversion();
-		if (!mail($email, $subject, $main))
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= 'From: Kika.Ievlev@yandex.ru'."\r\n".
+			'Reply-To: Kika.Ievlev@yandex.ru' . "\r\n" .
+			"X-Mailer: PHP/".phpversion();
+			if (! empty($_POST)) {
+				if (!mail($email, $subject, $msg, $headers))
 		{
-			return Model::DB_ERROR1;
+			return Model::DB_ERROR;
 		}
-    }*/
-}
+			}
+		
+    }
 }

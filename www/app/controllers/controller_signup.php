@@ -15,7 +15,7 @@ class Controller_Signup extends Controller
 
     public function action_create()
     {
-        if (!(isset($_POST['username']) and isset($_POST['email']) and isset($_POST['password']))) {
+        if (!(isset($_POST['username']) and isset($_POST['email']) and isset($_POST['password']) and isset($_POST['pass2']))) {
             $this->action_index(Model::INCOMPLETE_DATA);
             return ;
         }
@@ -34,6 +34,10 @@ class Controller_Signup extends Controller
                 $this->view->generate(Controller_Signup::$view_page, Controller::$template,
                     Model::USER_EXIST);
                 break;
+            case Model::EMAIL_EXIST:
+                $this->view->generate(Controller_Signup::$view_page, Controller::$template,
+                    Model::EMAIL_EXIST);
+                break;
             case Model::SUCCESS:
                 $this->view->generate(Controller_Signup::$view_page, Controller::$template,
 					Model::SUCCESS);
@@ -45,13 +49,14 @@ class Controller_Signup extends Controller
 			case Model::WEAK_PASSWORD:
 				$this->view->generate(Controller_Signup::$view_page, Controller::$template,
                     Model::WEAK_PASSWORD);
-            case Model::DB_ERROR1:
+            break;
+            /*case Model::DB_ERROR1:
                 $this->view->generate(Controller_Signup::$view_page, Controller::$template,
                     Model::DB_ERROR1);
             break;
             case Model::DB_ERROR2:
                 $this->view->generate(Controller_Signup::$view_page, Controller::$template,
-                    Model::DB_ERROR2);
+                    Model::DB_ERROR2);*/
         }
     }
 }
