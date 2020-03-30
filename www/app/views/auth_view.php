@@ -20,24 +20,30 @@ elseif ($data === Model::DB_ERROR)
 	</p>
 SUC;
 }
+elseif ($data === Model::ALREADY_C)
+{
+	echo <<<SUC
+	<br><br><br><br><br><br>
+	<p style="text-align: center; font-size: larger">
+	Account has been already verified.
+	</p>
+SUC;
+}
 else
 {
 		echo <<<SIGNIN
-	<div class="zhir"></div>
-	<div class="auth">
-		<p>Sign in to amazing Camagru</p>
-		<form name="signin" action="/auth/signin" method="post">
-			<p><input  type="text" placeholder="Nickname" name="nickname" required="required"></p>
-			<p><input type="password" placeholder="Password" name="password" required="required"></p>
-			<hr>
-			<br>
-			<p><input type="submit" name="submit" value="Sign In"></p>
+		<div class="wrapper">
+		<div class="content">
+	<form class="box" method="POST">
+	<h1>Login</h1>
+	<input type="TEXT" name="username" placeholder="Username" required/>
+	<input type="PASSWORD" name="password" placeholder="Password" required/>
+	<input type="SUBMIT" name="submit" value="Login" />
+	<a class="add" href='/forgotten'> forgot your password?</a>
+	<a class="add" href='/signup'>sign in now!</a>
+	</form>
+	</div>
 SIGNIN;
 		if ($data === Model::INCORRECT_NICK_PASS)
 			echo "<p style='color: darkred; font-style: italic'>Incorrect login or password</p>";
-		echo <<<SIGNIN
-			<p><a href="/forgotten">Forgotten password?</a></p>
-		</form>
-	</div>
-SIGNIN;
 }

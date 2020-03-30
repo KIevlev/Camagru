@@ -9,11 +9,11 @@ class Model_Signup extends Model
     private static $sql_get_id = "SELECT `id` FROM `user` WHERE `email` = :email AND `username` = :username
                                     AND password = :password";
 
-	public static function token()
+/*	public static function token()
 	{
 		return bin2hex(random_bytes(16));
 	}
-
+*/
     public function create_account($username, $passwd, $email)
     {
         require "config/database.php";
@@ -125,7 +125,7 @@ $msg = '<html>
 <body>
   <p>Thank you for registering on our site!</p>
   <p> To confirm your entry, follow this<p>
-  <p><a href="http://localhost:8080/auth/confirm/">LINK</a></p>
+  <p><a href="http://localhost:8080/auth/confirm/'.$sid.'">LINK</a></p>
 </body>
 </html>';
 $msg = wordwrap($msg,70, "\r\n");

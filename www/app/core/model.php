@@ -18,11 +18,17 @@ class Model
     const WRONG_PASSWORD		= 14;
 	const EMPTY_PROFILE			= 15;
 	const PASS_DIFF				= 16;
+	const ALREADY_C				= 17;
 
     const REASON_CREATE			= 100;
     const REASON_FORGOTTEN		= 101;
 
-    private $sql_read = "SELECT * FROM user WHERE username = :username AND id = :uid AND password = :password";
+	private $sql_read = "SELECT * FROM user WHERE username = :username AND id = :uid AND password = :password";
+	
+	public static function token()
+	{
+		return bin2hex(random_bytes(16));
+	}
 
     protected function _auth()
 	{

@@ -15,12 +15,12 @@ class Controller_Auth extends Controller
 
     public function action_signin($param)
     {
-        if (isset($_SESSION['nickname']) and isset($_SESSION['password']))
+        if (isset($_SESSION['username']) and isset($_SESSION['password']))
         {
             header("Location: /main/");
             exit();
         }
-        $data = $this->model->get_data($param['nickname'], $param['password']);
+        $data = $this->model->get_data($param['username'], $param['password']);
         if ($data === Model::SUCCESS)
         {
             header("Location: /main/");
