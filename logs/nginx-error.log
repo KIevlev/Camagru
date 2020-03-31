@@ -411,3 +411,8 @@
 2020/03/30 16:23:18 [error] 6#6: *6 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
 2020/03/30 16:23:42 [error] 6#6: *8 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
 2020/03/30 19:58:20 [error] 6#6: *90 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
+2020/03/31 13:39:42 [error] 6#6: *1 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
+2020/03/31 17:07:49 [error] 6#6: *66 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
+2020/03/31 18:04:13 [error] 6#6: *110 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
+2020/03/31 19:35:59 [error] 6#6: *252 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"
+2020/03/31 22:03:51 [error] 7#7: *1 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 172.20.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080"

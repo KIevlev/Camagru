@@ -18,15 +18,30 @@ SUC;
 else
 {
 	echo <<<SET
-<link type="text/css" rel="stylesheet" href="/css/settings.css">
-<div class="settings">
+	<br><br>
+	<link type="text/css" rel="stylesheet" href="/css/settings.css">
+	<div class="settings">
 	<h1>SETTINGS</h1>
 	<hr>
 	<p>Sending  notification to E-Mail</p>
 	<form action="/settings/send_email/" method="post">
-		<input type="radio" name="send_email" value="Enable" checked="checked"> Enable
+SET;
+	if ($_SESSION['send_email'] === 0)
+	{
+	echo <<<SEP
+		<input type="radio" name="send_email" value="Enable"> Enable
+		<input type="radio" name="send_email" value="Disable" checked="checked"> Disable <br>
+SEP;
+	}
+	else
+	{
+	echo <<<SEN
+	<input type="radio" name="send_email" value="Enable" checked="checked"> Enable
 		<input type="radio" name="send_email" value="Disable"> Disable <br>
-		<input type="submit" name="submit" value="Change Email Settings">
+SEN;
+	}
+	echo <<<SET
+		<input type="submit" name="submit" value="Change Email">
 	</form>
 	<hr>
 	<p>Change nickname</p>
@@ -65,8 +80,10 @@ SET;
 	elseif ($data === Model::WEAK_PASSWORD)
 		echo "<p style='color: darkred; font-style: italic'>Your password is weak. Please, input minimum
 																	7 characters with upper case symbol</p>";
-	elseif ($data === FALSE)
-		echo "<p style='color: darkred; font-style: italic'>Please, enter new password twice</p>";
+	elseif ($data === Model::PASS_NOT_MATCH)
+		echo "<p style='color: darkred; font-style: italic'>Please, enter new password twice</p>";															
+	elseif ($data === Model::SAME_PASS)
+		echo "<p style='color: darkred; font-style: italic'>New password should differ from the old one</p>";
 	echo <<<SET
 	<hr>
 	<p>Change Icon</p>

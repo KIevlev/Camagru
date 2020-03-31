@@ -8,7 +8,7 @@ Sorry, we have some problem with database. Please stand by.
 DB_SUC;
 elseif ($data === Model::EMPTY_PROFILE)
 	echo <<<DB_SUC
-<br><br><br><br><br><br>
+<br /><br /><br /><br><br><br>
 <p style="text-align: center; font-size: larger">
 You don't have any post. Let's go create it!
 </p>

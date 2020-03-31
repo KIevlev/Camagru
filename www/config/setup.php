@@ -21,6 +21,7 @@ require "database.php";
             `username` VARCHAR(25) NOT NULL,
             `password` VARCHAR(255) NOT NULL,
             `email` VARCHAR(100) NOT NULL,
+            `send_email` TINYINT(1)UNSIGNED NOT NULL DEFAULT 1,
             `token` VARCHAR(32) NOT NULL,
             `verified` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
             `picturesource` LONGTEXT

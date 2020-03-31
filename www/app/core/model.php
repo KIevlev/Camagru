@@ -25,7 +25,7 @@ class Model
     const REASON_CREATE			= 100;
     const REASON_FORGOTTEN		= 101;
 
-	private $sql_read = "SELECT * FROM user WHERE username = :username AND id = :uid AND password = :password";
+	private $sql_read = "SELECT * FROM `user` WHERE `username` = :username AND `id` = :id AND `password` = :password";
 	
 	public static function token()
 	{
@@ -39,7 +39,7 @@ class Model
 		require "config/database.php";
 		try
 		{
-			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASS, $DB_OPTS);
+			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
 			$stmt = $pdo->prepare($this->sql_read);
 			$stmt->execute(array(
@@ -50,13 +50,14 @@ class Model
 			$data = $stmt->fetch();
 			if (!$data)
 				return Model::INCORRECT_NICK_PASS;
-			elseif ($data['confirmed'] == 1)
+			elseif ($data['verified'] == 1)
 				return Model::SUCCESS;
 			else
 				return Model::NON_CONFIRMED_ACC;
 		}
 		catch (PDOException $ex)
 		{
+			Route::console_log($ex);
 			return Model::DB_ERROR;
 		}
 	}

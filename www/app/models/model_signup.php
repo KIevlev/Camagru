@@ -2,8 +2,8 @@
 class Model_Signup extends Model
 {
     private static $sql_check = "SELECT * FROM `user` WHERE `email` = :email OR `username` = :username";
-    private static $sql_write_db = "INSERT INTO `user` (`id`, `username`, `password`, `email`, `token`, `verified`)
-                    VALUES (NULL, :username, :password, :email, :token, 0)";
+    private static $sql_write_db = "INSERT INTO `user` (`id`, `username`, `password`, `email`, `token`, `verified`, `picturesource`)
+                    VALUES (NULL, :username, :password, :email, :token, 0, :picturesource)";
     private static $sql_add_to_change = "INSERT INTO `change_table` (`id`, `id_user`, `reason`, `sid`)
                     VALUES (NULL, :id, :reason, :sid)";
     private static $sql_get_id = "SELECT `id` FROM `user` WHERE `email` = :email AND `username` = :username
@@ -24,7 +24,8 @@ class Model_Signup extends Model
 			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
 			$token = Model_Signup::token();
-			$arr = array('username' => $username, 'password' => hash("whirlpool", $passwd), 'email' => $email, 'token' => $token);
+			$picsource = "/images/defaultprofile.jpg";
+			$arr = array('username' => $username, 'password' => hash("whirlpool", $passwd), 'email' => $email, 'token' => $token, 'picturesource' => $picsource);
 			$arr2 = array('username' => $username, 'email' => $email);
 			if ($this->_check($pdo, $arr2))
 			return self::USER_EXIST;

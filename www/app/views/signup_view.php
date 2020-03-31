@@ -41,11 +41,11 @@ elseif ($data === Model::SUCCESS)
 	echo <<<SUC
 	<br><br><br><br><br><br>
 	<p style="text-align: center; font-size: larger">
-		You successfully create account! Now, check you email address and confirm account.
+		You have successfully created an account! Now, check you email address and confirm account.
 	</p>
-	<a  style="text-align: center;" href="/main">
-		<p>return to main page</p>
-	</a>
+	<a href="/main" class="button_1" >Return to main page</a></div>
+	</div>
+	</div>
 SUC;
 }
 else

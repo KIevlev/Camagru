@@ -12,4 +12,8 @@ $DB_OPTS = [
     PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 $email_host = 'localhost:8080';
+
+$ftp_host = '172.20.0.2:20';
+$ftp_user = 'admin';
+$ftp_pass = 'admin';
 ?>
