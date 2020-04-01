@@ -156,18 +156,17 @@ class Model_Settings extends Model
 			default:
 				return Model::FORBIDDEN_FILETYPE;
 		}
-		$ftp = ftp_connect($ftp_host);
-		ftp_login($ftp, $ftp_user, $ftp_pass);
+//		$ftp = ftp_connect($ftp_host);
+//		Route::console_log($ftp);
+		/*ftp_login($ftp, $ftp_user, $ftp_pass);
 		$lst = ftp_nlist($ftp, "/icons/$id.jpg");
-		if (in_array("/icons/$id.jpg", $lst))
-		{
-			ftp_delete($ftp, "/icons/$id.jpg");
-		}
-		ftp_close($ftp);
+		*/
+		if (file_exists("./icons/$id.jpg"))
+			unlink("./icons/$id.jpg");
 		$img = imagescale($src_img, 128, 128);
-		if (imagejpeg($img, "ftp://$ftp_user:$ftp_pass@$ftp_host/icons/$id.jpg"))
+		if (imagejpeg($img, "./icons/$id.jpg"))
 			return Model::SUCCESS;
-		else
+		//else
 			return Model::DB_ERROR;
 	}
 }

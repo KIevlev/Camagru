@@ -79,11 +79,11 @@ class Model_Article extends Model
 		if ($confirmed === 0)
 			return;
 		$subject = "You have comments, sweetie";
-		$main = "Hello, $nickname! Under your post left a comment! Rather check it out! http://".
+		$main = "Hello, $nickname! Somebody left a comment under your post! Check it out! http://".
 			$email_host."/article/index/".$aid;
 		$main = wordwrap($main, 65, "\r\n");
-		$headers = 'From: kostya.marinenkov@gmail.com'."\r\n".
-			"Reply-To: kostya.marinenkov@gmail.com"."\r\n".
+		$headers = 'From: Kika.Ievlev@yandex.ru'."\r\n".
+			"Reply-To: Kika.Ievlev@yandex.ru"."\r\n".
 			"X-Mailer: PHP/".phpversion();
 		mail($email, $subject, $main, $headers);
 	}

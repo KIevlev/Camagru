@@ -3,13 +3,33 @@ FROM php:7.2.2-fpm
 ENV TIMEZONE Europe/Moscow
 
 RUN apt-get update && \
-    apt-get install -y msmtp && \ 
-	apt-get install -y mysql-server && \
-    apt-get install -y vsftpd && \
-	docker-php-ext-install mysqli pdo pdo_mysql && \
+    apt-get install -y \
+#    && docker-php-ext-configure gd --with-jpeg-dir=DIR --with-freetype-dir=DIR --with-png-dir=DIR \
+#    && docker-php-ext-install -j$(nproc) gd
+    msmtp \ 
+	mysql-server \
+    vsftpd \
+    libpng-dev \
+    libjpeg-dev \
+    zlib1g-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libwebp-dev && \
+	docker-php-ext-install exif mysqli pdo pdo_mysql && \
     docker-php-ext-enable mysqli &&\
     rm -rf /var/lib/apt/lists/* && \
     update-alternatives --install /usr/sbin/sendmail sendmail /usr/bin/msmtp 10
+
+
+RUN docker-php-ext-configure gd \
+    --with-webp-dir=/usr/include/  \
+    --with-jpeg-dir=/usr/include/  \
+    --with-png-dir=/usr/include/  \
+    --with-freetype-dir=/usr/include/ \
+    --with-gd && \
+    docker-php-ext-install gd
+ #       php7.2-gd \
+#RUN docker-php-ext-install gd
 
 COPY php.ini /usr/local/etc/php/
 
@@ -27,20 +47,20 @@ EXPOSE 20-21 30000-31000
 #RUN ufw disable
 #RUN ufw enable
 
-COPY vsftpd.conf /etc/vsftpd.conf
+#COPY vsftpd.conf /etc/vsftpd.conf
 
-RUN useradd -d /home/admin -m -s/bin/bash -p $(openssl passwd -1 admin) admin
-RUN echo "admin" | tee -a /etc/vsftpd.user_list
+#RUN useradd -d /home/admin -m -s/bin/bash -p $(openssl passwd -1 admin) admin
+#RUN echo "admin" | tee -a /etc/vsftpd.user_list
 
-RUN mkdir -p /home/admin/ftp/icons
-RUN mkdir -p /home/admin/ftp/photos
-RUN chmod 550 /home/admin/ftp
-RUN chmod 750 /home/admin/ftp/icons
-RUN chmod 750 /home/admin/ftp/photos
-RUN chown -R admin: /home/admin/ftp
+#RUN mkdir -p /home/admin/ftp/icons
+#RUN mkdir -p /home/admin/ftp/photos
+#RUN chmod 550 /home/admin/ftp
+#RUN chmod 750 /home/admin/ftp/icons
+#RUN chmod 750 /home/admin/ftp/photos
+#RUN chown -R admin: /home/admin/ftp
     
-RUN echo -e '#!/bin/sh\necho "This account is limited to FTP access only."' | tee -a  /bin/ftponly &&\
-chmod a+x /bin/ftponly   
-RUN usermod admin -s /bin/ftponly
+#RUN echo -e '#!/bin/sh\necho "This account is limited to FTP access only."' | tee -a  /bin/ftponly &&\
+#chmod a+x /bin/ftponly   
+#RUN usermod admin -s /bin/ftponly
 
 WORKDIR "/var/www"

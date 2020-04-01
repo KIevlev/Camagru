@@ -12,7 +12,6 @@ class Controller_Exchange extends Controller
     {
         $data = $this->model->get_photo($param);
         $this->view->push_img($data);
-
     }
 
     function action_icon($param)
