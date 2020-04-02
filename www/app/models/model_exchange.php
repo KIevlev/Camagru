@@ -8,7 +8,7 @@ class Model_Exchange extends Model
         $img = @file_get_contents("./photos/$param.jpg");
         if (!$img)
 		{
-			$img = file_get_contents("images/oops.jpg");
+			$img = file_get_contents("./images/oops.jpg");
 		}
 		return $img;
     }
@@ -20,7 +20,7 @@ class Model_Exchange extends Model
 			include "config/database.php";
 			if (!$img)
 			{
-				$img = file_get_contents("images/Default_Icon.png");
+				$img = file_get_contents("./images/Default_Icon.png");
 			}
 			return $img;
     }

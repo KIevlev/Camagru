@@ -9,8 +9,8 @@ class Model_Main extends Model
                 FROM `image`, `user` 
                 WHERE `user`.`id` = `image`.`userid` AND `image`.`userid` = :uid
                 ORDER BY `image`.`creationdate` DESC LIMIT 5 OFFSET :page";
-	private static $sql_get_likes = "SELECT COUNT(*) FROM `like` WHERE `imageid` = :aid";
-	private static $sql_num_page = "SELECT COUNT(*) as `num` FROM `image` WHERE `userid`=?";
+	private static $sql_get_likes = "SELECT COUNT(*) as likes FROM `like` WHERE `imageid` = :aid";
+	private static $sql_num_page = "SELECT COUNT(*) as num FROM `image` WHERE `userid`=?";
 
     public function get_feed()
     {
@@ -35,7 +35,7 @@ class Model_Main extends Model
 				{
 					$stmt->execute(array('aid' => $data[$i]['aid']));
 					$likes = $stmt->fetch();
-					$data[$i]['like'] = $likes;
+					$data[$i]['likes'] = $likes['likes'];
 				}
 				$_SERVER['type'] = 'feed';
 				return $data;
@@ -80,7 +80,8 @@ class Model_Main extends Model
 			{
 				$stmt->execute(array('aid' => $data[$i]['aid']));
 				$likes = $stmt->fetch();
-				$data[$i]['like'] = $likes;
+				$data[$i]['likes'] = $likes['likes'];;
+				Route::console_log($data);
 			}
 			$_SERVER['type'] = 'profile';
 			return $data;

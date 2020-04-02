@@ -1,7 +1,7 @@
 <?php
 class Model_Add extends Model
 {
-	private static $sql_add_post = "INSERT INTO `image` (`id`, `userid`, `source`, `description`) VALUES (NULL, :uid, :source,:description)";
+	private static $sql_add_post = "INSERT INTO `image` (`id`, `userid`, `description`, `creationdate`, `likes`) VALUES (NULL, :uid, :description, NOW(), 0)";
 	private static $sql_add_like = "INSERT INTO `like` (`id`, `userid`, `imageid`) VALUES (NULL, :uid, :aid)";
 	private static $sql_search_like = "SELECT * FROM `like` WHERE `imageid` = :aid AND `userid` = :uid";
 	private static $sql_del_like = "DELETE FROM `like` WHERE `imageid` = :aid AND `userid` = :uid";
@@ -14,17 +14,17 @@ class Model_Add extends Model
 			return Model::INCOMPLETE_DATA;
 		if (!is_uploaded_file($_FILES['image_upload']['tmp_name']))
 			return Model::UNUPLOADED_FILE;
-		$date = date("d-M-Y H:m:s");
+		//$date = date("d-M-Y H:m:s");
 		try
 		{
-			$id = $this->_insert_to_table($date);
+			$id = $this->_insert_to_table();
 		}
 		catch (PDOException $ex)
 		{
 			Route::console_log("1 ".$ex);
 			return Model::DB_ERROR;
 		}
-		if (($result = $this->_insert_to_ftp($id, $date)) === Model::SUCCESS)
+		if (($result = $this->_insert_to_ftp($id)) === Model::SUCCESS)
 			return array(Model::SUCCESS, $id);
 		else
 			return $result;
@@ -40,28 +40,27 @@ class Model_Add extends Model
 		$img = imagecreatefromstring(base64_decode($data[1]));
 		if ($img === FALSE)
 			return Model::UNUPLOADED_FILE;
-			$date = date("d-M-Y H:m:s");
+			//$date = date("d-M-Y H:m:s");
 		try
 		{
-			$id = $this->_insert_to_table($date);
+			$id = $this->_insert_to_table();
 		}
 		catch (PDOException $ex)
 		{
 			Route::console_log("2 ".$ex);
 			return Model::DB_ERROR;
 		}
-		if (($result = $this->_insert_to_ftp_base($id, $img, $date)) === Model::SUCCESS)
+		if (($result = $this->_insert_to_ftp_base($id, $img)) === Model::SUCCESS)
 			return array(Model::SUCCESS, $id);
 		else
 			return $result;
 	}
 
-	private function _insert_to_table($date)
+	private function _insert_to_table()
 	{
 		$arr = array(
 			'uid' => $_SESSION['uid'],
 			'description' => mb_strimwidth($_POST['description'], 0, 250),
-			'source' => $_SESSION['uid']."_".$date
 		);
 		try
 		{
@@ -75,12 +74,12 @@ class Model_Add extends Model
 		}
 		catch (PDOException $ex)
 		{
-			Route::console_log("3 ".$ex);
-			throw $ex;
+			return Model::DB_ERROR;
+			//throw $ex;
 		}
 	}
 
-	private function _insert_to_ftp($id, $date)
+	private function _insert_to_ftp($id)
 	{
 		include "config/database.php";
 		$type = exif_imagetype($_FILES['image_upload']['tmp_name']);
@@ -101,20 +100,20 @@ class Model_Add extends Model
 		$img = imagescale($src_img, 640, 480);
 		if (isset($_POST['sticker0']))
 			$img = $this->_add_stickers($img);
-			$string = "./photos/$id"."_$date".".jpg";
+			$string = "./photos/$id.jpg";
 		if (imagejpeg($img, $string))
 			return Model::SUCCESS;
 		else
 			return Model::DB_ERROR;
 	}
 
-	private function _insert_to_ftp_base($id, $img, $date)
+	private function _insert_to_ftp_base($id, $img)
 	{
 		include "config/database.php";
 		$img = imagescale($img, 640, 480);
 		if (isset($_POST['sticker0']))
 			$img = $this->_add_stickers($img);
-		$string = "./photos/$id_$date.jpg";
+		$string = "./photos/$id.jpg";
 			if (imagejpeg($img, $string))
 			return Model::SUCCESS;
 		else

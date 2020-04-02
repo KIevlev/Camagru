@@ -1,6 +1,8 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+//$img = file_get_contents("./images/Default_Icon.png");
+//echo "$img"
 require_once "./app/boot.php";
 //echo PHP_CONFIG_FILE_SCAN_DIR;
 //phpinfo();

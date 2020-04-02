@@ -64,11 +64,11 @@ SUC;
 		<div id ="description" style="text-align: center">Description<br><input type="text" form="upload_form" maxlength="250"
 																				required="required" name="description"></div>
 		<input style="display: none" id="submit" type="submit" form="upload_form">
-<!--		<div id="submit"><input type="submit" form="upload_form"></div></div>-->
+		<!--<div id="submit"><input type="submit" form="upload_form"></div></div>-->
 <button id="biba">START VIDEO</button>
 <button id="bsubmit" style="display: none" onclick="submit();"  id="buba">SEND IMAGE</button>
 </div>
-</div>
+<!--</div>-->
 <canvas id="hide_canv" style="display: none" width="640" height="480"></canvas>
 MAIN;
 }

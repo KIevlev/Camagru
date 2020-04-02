@@ -1,19 +1,19 @@
 <?php
 class Model_Article extends Model
 {
-	private $sql_get_post = "SELECT articles.id as aid, users.id as uid, users.nickname, articles.`likes`, articles.description 
-                FROM articles, users, comments
-                WHERE articles.id = :aid AND users.id = articles.id_user
-                ORDER BY articles.publication_date DESC";
-	private $sql_get_comment = "SELECT comments.id as cid, users.id as uid, users.nickname as nickname, content
-								FROM comments, users
-								WHERE id_post = :aid AND users.id = comments.id_user ORDER BY comment_date ASC";
-	private $sql_put_comment = "INSERT INTO comments VALUES (NULL, :uid, :aid, NOW(), :content)";
-	private $sql_send_email = "SELECT email, send_email FROM users INNER JOIN articles
-								ON users.id = articles.id_user AND articles.id = :aid";
-	private static $sql_get_likes = "SELECT COUNT(*) as likes FROM likes_table WHERE id_article = :aid";
-	private static $sql_del_post = "DELETE FROM articles WHERE id = :aid AND id_user = :uid";
-	private static $sql_del_comment = "DELETE FROM comments WHERE id = :cid AND id_user = :uid";
+	private $sql_get_post = "SELECT `image`.`id` as aid, `user`.`id` as uid, `user`.`username`, `image`.`likes`, `image`.`description` 
+                FROM `image`, `user`
+                WHERE `image`.`id` = :aid AND `user`.`id` = `image`.`userid`
+                ORDER BY `image`.`creationdate` DESC";
+	private $sql_get_comment = "SELECT `comment`.`id` as cid, `user`.`id` as uid, `user`.`username` as nickname, `comment`.`text`
+								FROM `comment`, `user`
+								WHERE `imageid` = :aid AND `user`.`id` = `comment`.`userid` ORDER BY `comment_date` ASC";
+	private $sql_put_comment = "INSERT INTO `comment` VALUES (NULL, :uid, :aid, NOW(), :content)";
+	private $sql_send_email = "SELECT `email`, `send_email` FROM `user` INNER JOIN `image`
+								ON `user`.`id` = `image`.`userid` AND `image`.id = :aid";
+	private static $sql_get_likes = "SELECT COUNT(*) as likes FROM `like` WHERE `imageid` = :aid";
+	private static $sql_del_post = "DELETE FROM `image` WHERE `id` = :aid AND `userid` = :uid";
+	private static $sql_del_comment = "DELETE FROM `comment` WHERE `id` = :cid AND `userid` = :uid";
 
 
 	public function get_data($aid)
@@ -39,6 +39,7 @@ class Model_Article extends Model
 		}
 		catch (PDOException $ex)
 		{
+			throw $ex;
 			return Model::DB_ERROR;
 		}
 	}
@@ -64,11 +65,12 @@ class Model_Article extends Model
 			$stmt = $pdo->prepare($this->sql_send_email);
 			$stmt->execute(array('aid' => $aid));
 			$data = $stmt->fetch();
-			$this->_send_mail($data['email'], $_SESSION['nickname'], $aid, $data['send_email']);
+			$this->_send_mail($data['email'], $_SESSION['username'], $aid, $data['send_email']);
 			return Model::SUCCESS;
 		}
 		catch (PDOException $ex)
 		{
+			throw $ex;
 			return Model::DB_ERROR;
 		}
 	}
@@ -106,6 +108,7 @@ class Model_Article extends Model
 		}
 		catch (PDOException $ex)
 		{
+			throw $ex;
 			return Model::DB_ERROR;
 		}
 	}
@@ -131,6 +134,7 @@ class Model_Article extends Model
 		}
 		catch (PDOException $ex)
 		{
+			throw $ex;
 			return Model::DB_ERROR;
 		}
 	}

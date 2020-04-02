@@ -11,12 +11,18 @@ class Controller_Exchange extends Controller
     function action_photo($param)
     {
         $data = $this->model->get_photo($param);
-        $this->view->push_img($data);
+        $this->push_img($data);
+    }
+
+    public function push_img($img)
+    {
+        header("Content-type: image/jpeg");
+        echo $img;
     }
 
     function action_icon($param)
     {
         $data = $this->model->get_icon($param);
-        $this->view->push_img($data);
+        $this->push_img($data);
     }
 }

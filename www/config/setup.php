@@ -39,9 +39,9 @@ require "database.php";
         $sql = "CREATE TABLE `image` (
             `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `userid` INT UNSIGNED NOT NULL,
-            `source` LONGTEXT NOT NULL,
             `description` VARCHAR(250) DEFAULT NULL,
             `creationdate` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            `likes` INT UNSIGNED NOT NULL,
             FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE
             )";
         $dbo->exec($sql);
@@ -75,7 +75,8 @@ require "database.php";
             `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `userid` INT UNSIGNED NOT NULL,
             `imageid` INT UNSIGNED NOT NULL,
-            `text` VARCHAR(2000) NOT NULL,
+            `comment_date` DATETIME NOT NULL,
+            `text` VARCHAR(250) NOT NULL,
             FOREIGN KEY (userid) REFERENCES user(id) ON DELETE CASCADE,
             FOREIGN KEY (imageid) REFERENCES image(id) ON DELETE CASCADE
             )";

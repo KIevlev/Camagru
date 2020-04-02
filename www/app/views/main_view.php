@@ -10,7 +10,7 @@ elseif ($data === Model::EMPTY_PROFILE)
 	echo <<<DB_SUC
 <br /><br /><br /><br><br><br>
 <p style="text-align: center; font-size: larger">
-You don't have any post. Let's go create it!
+You don't have any posts. Go create one!
 </p>
 DB_SUC;
 else
@@ -23,18 +23,18 @@ else
 	<article class="post">
 	<a name="{$d['aid']}"></a>
 			<section class="user-profile">
-				<img class="user-pic" src="./icons/{$d['uid']}">
+				<img class="user-pic" src="/exchange/icon/{$d['uid']}">
 				<a href="/main/profile/{$d['uid']}"><p>{$d['username']}</p></a>
 			</section>
 			<section class="photo">
-				<img src="./photos/{$d['aid']}">
+				<img src="/exchange/photo/{$d['aid']}">
 			</section>
 			<section class="like-comment_button">
 				<form action="/add/like/{$d['aid']}" method="post">
 			<input class="like-button" name="like" value="LIKE IT!" type="submit">
 </form>
 				<br>
-				<p style="font-weight: bold">This picture liked {$d['like']} people</p>
+				<p style="font-weight: bold">This picture liked {$d['likes']} people</p>
 				<p><span style="font-weight: bold">{$d['username']}: </span>{$d['description']}</p>
 				<div class="comment-div"><a class="comment-button" href="/article/index/{$d['aid']}">Open comments</a></div>
 			</section>
@@ -73,9 +73,9 @@ article;
 			echo "<div class='navipage'><a href='/main/$type?page=2'><button>👉🏻︎</button></a></div>";
 		} else
 		{
-			echo "<div class='navipage'><a href='/404'><button>🖕🏿</button></a></div>";
+			echo "<div class='navipage'><a><button>🖕🏿</button></a></div>";
 			echo "<div class='navipage' style='width: 390px'></div>";
-			echo "<div class='navipage'><a href='/404'><button>🖕🏻</button></a></div>";
+			echo "<div class='navipage'><a><button>🖕🏻</button></a></div>";
 		}
 	}
 	echo "</div>";
