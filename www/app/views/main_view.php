@@ -21,23 +21,30 @@ else
 	{
 		echo <<<article
 	<article class="post">
+	<div class="wrapper">
+	<div class="content">
+	<div class="box_main">
 	<a name="{$d['aid']}"></a>
 			<section class="user-profile">
-				<img class="user-pic" src="/exchange/icon/{$d['uid']}">
+				<img class="user-pic"  width="50" height="50"  src="/exchange/icon/{$d['uid']}">
 				<a href="/main/profile/{$d['uid']}"><p>{$d['username']}</p></a>
 			</section>
 			<section class="photo">
-				<img src="/exchange/photo/{$d['aid']}">
+				<img width="600vw" heigh="60vh" src="/exchange/photo/{$d['aid']}">
 			</section>
+			<p><span style="font-weight: bold">{$d['username']}: </span>{$d['description']}</p>
 			<section class="like-comment_button">
 				<form action="/add/like/{$d['aid']}" method="post">
-			<input class="like-button" name="like" value="LIKE IT!" type="submit">
-</form>
-				<br>
-				<p style="font-weight: bold">This picture liked {$d['likes']} people</p>
-				<p><span style="font-weight: bold">{$d['username']}: </span>{$d['description']}</p>
+			<div class="likes">
+			<input  class="fa fa-thumbs-o-up" style="font-size:36px id="like" name="like" value="&#xf087" type="submit">
+			<span><i style="font-weight: bold">{$d['likes']}</i>
+			</div></form>
+			<br>
 				<div class="comment-div"><a class="comment-button" href="/article/index/{$d['aid']}">Open comments</a></div>
-			</section>
+				</section>
+		</div>
+		</div>
+		</div>
 		</article>
 article;
 	}

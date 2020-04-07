@@ -21,6 +21,9 @@ class Model_Article extends Model
 		include "config/database.php";
 		try
 		{
+			$result = $this->_auth();
+		if ( $result !== Model::SUCCESS)
+		return $result;
 			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
 			$stmt = $pdo->prepare($this->sql_get_post);
@@ -35,6 +38,7 @@ class Model_Article extends Model
 			$stmt->execute(array('aid' => $data[0]['aid']));
 			$likes = $stmt->fetch();
 			$data[0]['likes'] = $likes['likes'];
+			//Route::console_log($data);
 			return $data;
 		}
 		catch (PDOException $ex)

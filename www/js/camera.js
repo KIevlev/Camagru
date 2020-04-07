@@ -5,10 +5,14 @@ var isDraggable = false;
 var isVideo = false;
 var stickers = [];
 var source = 0;
+var video;
+var processor;
 
 window.onload = function() {
-    document.getElementById('biba').addEventListener('click', start_camera);
+    document.getElementById('start_video').addEventListener('click', start_camera);
     canvas = document.getElementById("canvas");
+    document.getElementById('video').style.display = 'none';
+    //document.getElementById('take_s').addEventListener('click', takepicture);
     context = canvas.getContext("2d");
     imgs = document.getElementsByTagName('img');
     for (i = 1; i < imgs.length; i++)
@@ -30,8 +34,9 @@ function img_list(path) {
     }
 }
 
+
 function start_camera() {
-    var video = document.getElementById('video');
+    video = document.getElementById('video');
     if (navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
         video.srcObject = stream;
         video.play();
@@ -44,10 +49,11 @@ function start_camera() {
     {
         imgs[i].style.display = 'inline-flex';
     }
+    
     document.getElementById('file_up').style.display = 'none';
     _Go(stickers);
     document.getElementById('bsubmit').style.display = 'block';
-    document.getElementById('biba').style.display = 'none';
+    document.getElementById('start_video').style.display = 'none';
     document.getElementById('del_stick').style.display = 'block';
     source = 1;
 }
@@ -60,7 +66,9 @@ function _Go(stickers) {
     _MouseEvents(stickers);
     if (isVideo) {
         setInterval(function () {
-            _ResetCanvas();
+           _ResetCanvas();
+           context.fillRect(0, 0, 640, 480);
+            context.drawImage(video, 0, 0, 640, 480);
             _DrawImage(stickers);
         }, 1000 / 60);
     }
@@ -130,7 +138,7 @@ function readURL(input) {
     });
     if (file)
         reader.readAsDataURL(file);
-    document.getElementById('biba').style.display = 'none';
+    document.getElementById('start_video').style.display = 'none';
     document.getElementById('bsubmit').style.display = 'block';
     document.getElementById('file_up').style.display = 'none';
     document.getElementById('del_stick').style.display = 'block';

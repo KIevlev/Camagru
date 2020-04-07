@@ -10,12 +10,18 @@ class Controller_Article extends Controller
 
 	public function action_index($param = null)
 	{
+		$data = $this->model->get_data($param);
 		if ($param == null)
 		{
 			Route::ErrorPage404();
 			exit();
 		}
-		$data = $this->model->get_data($param);
+		elseif ($data === Model::INCORRECT_NICK_PASS)
+		{
+			header("Location: /auth/");
+			exit;
+		}
+		
 		$this->view->generate(Controller_Article::$view_page, Controller::$template, $data);
 	}
 

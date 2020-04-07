@@ -65,7 +65,7 @@ SUC;
 																				required="required" name="description"></div>
 		<input style="display: none" id="submit" type="submit" form="upload_form">
 		<!--<div id="submit"><input type="submit" form="upload_form"></div></div>-->
-<button id="biba">START VIDEO</button>
+<button id="start_video">START VIDEO</button>
 <button id="bsubmit" style="display: none" onclick="submit();"  id="buba">SEND IMAGE</button>
 </div>
 <!--</div>-->

@@ -47,7 +47,6 @@ class Model_Add extends Model
 		}
 		catch (PDOException $ex)
 		{
-			Route::console_log("2 ".$ex);
 			return Model::DB_ERROR;
 		}
 		if (($result = $this->_insert_to_ftp_base($id, $img)) === Model::SUCCESS)

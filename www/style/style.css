@@ -159,7 +159,6 @@ width: 75%;
 }
 .box input[type = "submit"]:hover{
 	background: #2ecc71;
-	
 }
 
 .add{
@@ -271,7 +270,7 @@ a {
 
 .footer p {
 	margin-top: 0px;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 }
 
 .Footer__name {
