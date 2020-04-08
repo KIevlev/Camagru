@@ -26,11 +26,11 @@ else
 	<div class="box_main">
 	<a name="{$d['aid']}"></a>
 			<section class="user-profile">
-				<img class="user-pic"  width="50" height="50"  src="/exchange/icon/{$d['uid']}">
+				<img class="user-pic"  src="/exchange/icon/{$d['uid']}">
 				<a href="/main/profile/{$d['uid']}"><p>{$d['username']}</p></a>
 			</section>
 			<section class="photo">
-				<img width="600vw" heigh="60vh" src="/exchange/photo/{$d['aid']}">
+				<img src="/exchange/photo/{$d['aid']}">
 			</section>
 			<p><span style="font-weight: bold">{$d['username']}: </span>{$d['description']}</p>
 			<section class="like-comment_button">
@@ -48,7 +48,7 @@ else
 		</article>
 article;
 	}
-	echo "<div style='display: inline-flex; margin-left: 25vw;'>";
+	echo "<div class='pag'>";
 	if ($_SERVER['type'] === 'feed')
 		$type = 'index/';
 	else
@@ -59,11 +59,11 @@ article;
 		{
 			$prev_page = $_GET['page'] - 1;
 			echo "<div class='navipage'><a href='/main/$type?page=$prev_page'><button>👈🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 390px'></div>";
+			echo "<div class='navipage' style='width: 34%'></div>";
 		} else
 		{
 			echo "<div class='navipage'><a href='/404'><button>🖕🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 390px'></div>";
+			echo "<div class='navipage' style='width: 34%'></div>";
 		}
 		if (!isset($_SERVER['last']))
 		{
@@ -76,12 +76,12 @@ article;
 		if (!isset($_SERVER['last']))
 		{
 			echo "<div class='navipage'><a href='/404'><button>🖕🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 390px'></div>";
+			echo "<div class='navipage' style='width: 34%'></div>";
 			echo "<div class='navipage'><a href='/main/$type?page=2'><button>👉🏻︎</button></a></div>";
 		} else
 		{
 			echo "<div class='navipage'><a><button>🖕🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 390px'></div>";
+			echo "<div class='navipage' style='width: 34%'></div>";
 			echo "<div class='navipage'><a><button>🖕🏻</button></a></div>";
 		}
 	}

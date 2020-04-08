@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*if ($data === Model::ARTICLE_NOT_FOUND)
 	echo <<<NOT_FOUND
 		<br><br><br><br><br><br>
@@ -6,7 +6,7 @@
 	Page not found. Please, check you link.
 	</p>
 NOT_FOUND;
-else*/if ($data === Model::DB_ERROR)
+else*/ if ($data === Model::DB_ERROR)
 	echo <<<DB
 		<br><br><br><br><br><br>
 	<p style="text-align: center; font-size: larger">
@@ -27,9 +27,9 @@ elseif ($data === Model::NON_CONFIRMED_ACC)
 	You account isn't confirmed. Please, check your email
 	</p>
 NCA;
-else
-{
+else {
 	echo <<<ARTICLE
+	<main>
 	<article class="post">
 	<div class="wrapper">
 	<div class="content">
@@ -39,18 +39,16 @@ else
 			<a href="/main/profile/{$data[0]['uid']}"><p>{$data[0]['username']}</p></a>
 		
 ARTICLE;
-if (isset($_SESSION['uid']) and $_SESSION['uid'] === $data[0]['uid'])
-{
-	echo "<h1> </h1>";
-	echo "<form action='/article/delete/{$data[0]['aid']}' method='post'>";
-	echo "<input style='font-style: italic; color: red' type='submit' name='del' value='Delete Post'>";
-	echo "</form><br>";
-	
-}
+	if (isset($_SESSION['uid']) and $_SESSION['uid'] === $data[0]['uid']) {
+		echo "<h1> </h1>";
+		echo "<form action='/article/delete/{$data[0]['aid']}' method='post'>";
+		echo "<input style='font-style: italic; color: red' type='submit' name='del' value='Delete Post'>";
+		echo "</form><br>";
+	}
 	echo <<<ARTICLE
 	</section>
 		<section class="photo">
-			<img src="/photos/{$data[0]['aid']}.jpg">
+			<img heigh="60vh" width="400vw" src="/exchange/photo/{$data[0]['aid']}">
 		</section>
 		<br>
 		<p><span style="font-weight: bold">{$data[0]['description']}</p>
@@ -62,9 +60,8 @@ if (isset($_SESSION['uid']) and $_SESSION['uid'] === $data[0]['uid'])
 			</div></form>
 			<br>
 ARTICLE;
-	
-	foreach ($data[1] as $data1)
-	{
+
+	foreach ($data[1] as $data1) {
 		$content = htmlentities($data1['text']);
 		echo <<<COMMENT
 	<div class="com">
@@ -80,7 +77,7 @@ COMMENT;
 </form>
 
 DEL_INPUT;
-		echo"</div><hr>";
+		echo "</div><hr>";
 	}
 	echo <<<ADD_COMMENT
 	<br>
@@ -90,5 +87,5 @@ DEL_INPUT;
 </form>
 ADD_COMMENT;
 
-	echo "</section></div></div></div></article>";
+	echo "</section></div></div></div></article></main>";
 }

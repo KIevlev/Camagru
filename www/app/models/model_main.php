@@ -74,7 +74,6 @@ class Model_Main extends Model
 			$num = $stmt->fetch();
 			if ($num['num'] == 5)
 				$_SERVER['last'] = true;
-
 			$stmt = $pdo->prepare(Model_Main::$sql_get_likes);
 			for ($i = 0; $i < count($data); $i++)
 			{
