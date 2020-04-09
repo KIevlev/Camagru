@@ -86,4 +86,27 @@ article;
 		}
 	}
 	echo "</div>";
+	echo "<div id='page-loading'><img id='pag' src='/images/pag.gif'></div>";
 }
+
+?>
+<script>
+document.addEventListener('DOMContentLoaded', function(){ 
+    var limit = 5;
+	var start = 0;
+	var action = 'inactive';
+	function load_data(limit, start)
+	{
+		var xhr = getXMLHttpRequest();
+
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
+            load_galerie();
+    };
+    xhr.open("POST", "/add/like/id", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("aid=" + id);
+	}
+}, false);
+</script>

@@ -11,6 +11,7 @@ class Model_Main extends Model
                 ORDER BY `image`.`creationdate` DESC LIMIT 5 OFFSET :page";
 	private static $sql_get_likes = "SELECT COUNT(*) as likes FROM `like` WHERE `imageid` = :aid";
 	private static $sql_num_page = "SELECT COUNT(*) as num FROM `image` WHERE `userid`=?";
+	private static $sql_get_image_num = "SELECT COUNT(*) as num FROM `image`"; 
 
     public function get_feed()
     {
