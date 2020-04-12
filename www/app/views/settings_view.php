@@ -18,13 +18,17 @@ SUC;
 else
 {
 	echo <<<SET
-	<br><br>
+	<br>
+	<div class="wrapper">
+	<div class="content">
+	<div class="box_main">
 	<link type="text/css" rel="stylesheet" href="/css/settings.css">
 	<div class="settings">
 	<h1>SETTINGS</h1>
 	<hr>
+	<div class="el">
 	<p>Sending  notification to E-Mail</p>
-	<form action="/settings/send_email/" method="post">
+	<form id="note" action="/settings/send_email/" method="post">
 SET;
 	if ($_SESSION['send_email'] === 0)
 	{
@@ -43,22 +47,27 @@ SEN;
 	echo <<<SET
 		<input type="submit" name="submit" value="Change Email">
 	</form>
+	</div>
 	<hr>
+	<div class="el">
 	<p>Change nickname</p>
 	<form action="/settings/nickname" method="post">
 		<input type="text" name="new_nick" placeholder="New Nickname" required="required">
 		<input type="submit" name="submit" value="Change Nickname">
 	</form>
+	</div>
 SET;
 	if ($data === Model::USER_EXIST)
 		echo "<p style='color: darkred; font-style: italic'>This login is already taken</p>";
 	echo <<<SET
 	<hr>
+	<div class="el">
 	<p>Change E-Mail</p>
 	<form action="/settings/change_email" method="post">
 		<input type="email" name="new_email" placeholder="New E-Mail" required="required">
 		<input type="submit" name="submit" value="Change E-Mail">
 	</form>
+	</div>
 SET;
 	if ($data === Model::EMAIL_EXIST)
 		echo "<p style='color: darkred; font-style: italic'>This E-Mail is already taken</p>";
@@ -66,6 +75,7 @@ SET;
 		echo "<p style='color: darkred; font-style: italic'>E-Mail incorrect. Please, enter valid address</p>";
 	echo <<<SET
 	<hr>
+	<div class="el">
 	<p>Change Password</p>
 	<form action="/settings/change_password" method="post">
 		<input type="password" name="old_password" placeholder="Current Password" required="required">
@@ -74,6 +84,7 @@ SET;
 		<br>
 		<input type="submit" name="submit" value="Change Password">
 	</form>
+	</div>
 SET;
 	if ($data === Model::WRONG_PASSWORD)
 		echo "<p style='color: darkred; font-style: italic'>Wrong correct old password</p>";
@@ -86,6 +97,7 @@ SET;
 		echo "<p style='color: darkred; font-style: italic'>New password should differ from the old one</p>";
 	echo <<<SET
 	<hr>
+	<div class="el">
 	<p>Change Icon</p>
 	<form id="upload_form" enctype="multipart/form-data" action="/settings/icon/" method="post">
 		<input type="file" name="image_upload" accept="image/jpeg, image/png, image/gif" required="required">
@@ -99,6 +111,13 @@ SET;
 	if ($data === Model::SUCCESS)
 		echo "<hr><p style='color: green; font-style: italic'>SUCCESS!</p>";
 	echo <<<SET
+	
+	</div>
+	<hr>
+	</div>
 </div>
+</div>
+</div>
+<br>
 SET;
 }

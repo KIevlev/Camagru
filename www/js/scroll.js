@@ -8,7 +8,7 @@ var endless = {
         // Prvent user from loading too much contents suddenly
         // Block the loading until this one is done
         endless.proceed = false;
-  
+
         // Load the next page
         var data = new FormData(),
             nextPg = endless.page + 1,
@@ -20,14 +20,13 @@ var endless = {
   
         // AJAX request
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', "ajax-contents.php", true);
+        xhr.open('GET', "/main/$type?page="+page, true);
         xhr.onload = function () {
           // No more contents to load
           if (this.response == "END") {
             loading.innerHTML = "END";
             endless.hasMore = false;
           }
-  
           // Contents loaded
           else {
             // Append into container + hide loading message
@@ -50,9 +49,7 @@ var endless = {
       // Get the current offset - how far "scrolled down"
       offset = document.documentElement.scrollTop + window.innerHeight;
   
-      // Check if user has hit the end of page
-      // console.log('Height: ' + height);
-      // console.log('Offset: ' + offset);
+
       if (offset === height) { 
         endless.load();
       }

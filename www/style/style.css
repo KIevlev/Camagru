@@ -7,6 +7,7 @@
 
 }
 
+
   nav {
 	background: #222;
 	padding: 5px 5%;
@@ -36,7 +37,7 @@
 
   .logo {
 		   flex: auto;
-		   margin-left: 5%;
+		   margin-left: 3%;
   }
 
 
@@ -78,7 +79,6 @@
 	text-align: center;
 	order: 3;
 	display: none;
-	margin-left: 1%;
   }
   .item.active {
 	display: block;
@@ -133,7 +133,6 @@ div.col-4:nth-child(1) {
 					width: 100%;
 					display: inline-flex;  
 					background-color: rgba(0, 0, 0, 0.7); 
-					padding-left: 20%;
 				}
   /* Navbar Toggle */
   .toggle {
@@ -231,9 +230,12 @@ div.col-4:nth-child(1) {
 		width: 100%;
 		display: inline-flex;  
 		background-color: rgba(0, 0, 0, 0.7); 
-		padding-left: 27%;
 	}
 
+	.el{
+		padding-top: 2%;
+		padding-bottom: 2%;
+	}
 	.about ul {
 		background-color: rgba(34, 34, 36, 0.8);
 		width: 60%;
@@ -495,6 +497,25 @@ width: 75%;
 }
 .box input[type = "submit"]:hover{
 	background: #2ecc71;
+}
+
+.settings h1{
+	font-size: 1em;
+	color: white;
+}
+#note{
+	color: white;
+}
+
+#upload_form {
+	color: white;
+	}
+.settings{
+	background-color: transparent;
+}
+.settings p{
+	font-weight: 500;
+	padding-top: 3px;
 }
 
 .add{

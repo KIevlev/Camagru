@@ -1,3 +1,10 @@
+<script>
+var h = document.getElementsByTagName('head').item(0);
+var s = document.createElement("script");
+s.type = "text/javascript"; 
+s.appendChild(document.createTextNode("src='/js/scroll.js'>"));
+h.appendChild(s);
+</script>
 <?php
 if ($data === Model::DB_ERROR)
 	echo <<<DB_SUC
@@ -46,6 +53,7 @@ else
 		</div>
 		</div>
 		</article>
+		
 article;
 	}
 	echo "<div class='pag'>";
@@ -53,60 +61,27 @@ article;
 		$type = 'index/';
 	else
 		$type = 'profile/' . $uid;
-	if (isset($_GET['page']))
+	if (isset($_POST['page']))
 	{
-		if (!isset($_SERVER['first']))
-		{
-			$prev_page = $_GET['page'] - 1;
-			echo "<div class='navipage'><a href='/main/$type?page=$prev_page'><button>👈🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 34%'></div>";
-		} else
-		{
-			echo "<div class='navipage'><a href='/404'><button>🖕🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 34%'></div>";
-		}
+
 		if (!isset($_SERVER['last']))
 		{
-			$next_page = $_GET['page'] + 1;
-			echo "<div class='navipage'><a href='/main/$type?page=$next_page'><button>👉🏻</button></a></div>";
-		} else
-			echo "<div class='navipage'><a><button>🖕🏻</button></a></div>";
+			echo "<div id='page-loading'><img id='pag' src='/images/pag.gif' style='visibility:hidden'></div>";
+		} 
 	} else
 	{
 		if (!isset($_SERVER['last']))
 		{
-			echo "<div class='navipage'><a href='/404'><button>🖕🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 34%'></div>";
-			echo "<div class='navipage'><a href='/main/$type?page=2'><button>👉🏻︎</button></a></div>";
+			echo "<div id='page-loading'><img id='pag' src='/images/pag.gif' style='visibility:hidden'></div>";
+			
+
 		} else
 		{
-			echo "<div class='navipage'><a><button>🖕🏿</button></a></div>";
-			echo "<div class='navipage' style='width: 34%'></div>";
-			echo "<div class='navipage'><a><button>🖕🏻</button></a></div>";
+			echo "ALL POSTS";
 		}
 	}
 	echo "</div>";
-	echo "<div id='page-loading'><img id='pag' src='/images/pag.gif'></div>";
+	
 }
 
 ?>
-<script>
-document.addEventListener('DOMContentLoaded', function(){ 
-    var limit = 5;
-	var start = 0;
-	var action = 'inactive';
-	function load_data(limit, start)
-	{
-		var xhr = getXMLHttpRequest();
-
-    xhr.onreadystatechange = function()
-    {
-        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0))
-            load_galerie();
-    };
-    xhr.open("POST", "/add/like/id", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("aid=" + id);
-	}
-}, false);
-</script>
