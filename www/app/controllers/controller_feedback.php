@@ -10,7 +10,8 @@ class Controller_Feedback extends Controller
 
     public function action_index($param = null)
 	{
-		$data = $this->model->index();
-		$this->view->generate(Controller_Feedback::$view_page, Controller::$template, $data);
-	}
+        $result = $this->model->index($param);
+		$this->view->generate(Controller_Feedback::$view_page, Controller::$template, $result);
+    }
+    
 }

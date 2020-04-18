@@ -5,14 +5,11 @@ var isDraggable = false;
 var isVideo = false;
 var stickers = [];
 var source = 0;
-var video;
-var processor;
 
 window.onload = function() {
-    document.getElementById('start_video').addEventListener('click', start_camera);
+    document.getElementById('start_v').addEventListener('click', start_camera);
     canvas = document.getElementById("canvas");
     document.getElementById('video').style.display = 'none';
-    //document.getElementById('take_s').addEventListener('click', takepicture);
     context = canvas.getContext("2d");
     imgs = document.getElementsByTagName('img');
     for (i = 0; i < imgs.length; i++)
@@ -34,9 +31,8 @@ function img_list(path) {
     }
 }
 
-
 function start_camera() {
-    video = document.getElementById('video');
+    var video = document.getElementById('video');
     if (navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
         video.srcObject = stream;
         video.play();
@@ -49,11 +45,10 @@ function start_camera() {
     {
         imgs[i].style.display = 'inline-flex';
     }
-    
     document.getElementById('file_up').style.display = 'none';
     _Go(stickers);
     document.getElementById('bsubmit').style.display = 'block';
-    document.getElementById('start_video').style.display = 'none';
+    document.getElementById('start_v').style.display = 'none';
     document.getElementById('del_stick').style.display = 'block';
     source = 1;
 }
@@ -66,9 +61,9 @@ function _Go(stickers) {
     _MouseEvents(stickers);
     if (isVideo) {
         setInterval(function () {
-           _ResetCanvas();
+            _ResetCanvas();
            context.fillRect(0, 0, 640, 480);
-            context.drawImage(video, 0, 0, 640, 480);
+           context.drawImage(video, 0, 0, 640, 480);
             _DrawImage(stickers);
         }, 1000 / 60);
     }
@@ -93,6 +88,7 @@ function _MouseEvents(stickers) {
 
         var mouseX = e.pageX - this.offsetLeft;
         var mouseY = e.pageY - this.offsetTop;
+
 
         if (mouseX >= (sticker.X - sticker.star_img.width/2) &&
             mouseX <= (sticker.X + sticker.star_img.width/2) &&
@@ -137,8 +133,9 @@ function readURL(input) {
     });
     if (file)
         reader.readAsDataURL(file);
-    document.getElementById('start_video').style.display = 'none';
+    document.getElementById('start_v').style.display = 'none';
     document.getElementById('bsubmit').style.display = 'block';
+    document.getElementById('bsubmit').style.color = 'black';
     document.getElementById('file_up').style.display = 'none';
     document.getElementById('del_stick').style.display = 'block';
     source = 2;
@@ -158,7 +155,8 @@ function submit() {
         form.appendChild(input);
     }
     if (source === 2)
-        document.getElementById('bsubmit').click();
+    // HZHZHZHZH
+        document.getElementById('submit').click();
     else if (source === 1)
     {
         document.getElementById('upload_form').setAttribute('action', '/add/create_base/')
@@ -170,7 +168,8 @@ function submit() {
         binput.style.display = 'none';
         binput.setAttribute('value', base);
         form.appendChild(binput);
-        document.getElementById('bsubmit').click();
+        document.getElementById('submit').click();
+        //HZHZHZHZH NE MENIAL
     }
     else alert('Please, create post');
 }

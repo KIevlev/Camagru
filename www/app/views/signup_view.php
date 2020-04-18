@@ -18,24 +18,6 @@ if ($data === Model::DB_ERROR)
 	</p>
 SUC;
 }
-/*elseif ($data === Model::DB_ERROR1)
-{
-	echo <<<SUC
-	<br><br><br><br><br><br>
-	<p style="text-align: center; font-size: larger">
-	AAAAAAAAAAAAAAAAAAAAAa
-	</p>
-SUC;
-}
-elseif ($data === Model::DB_ERROR2)
-{
-	echo <<<SUC
-	<br><br><br><br><br><br>
-	<p style="text-align: center; font-size: larger">
-	BBBBBBBBBBBBBBBBB
-	</p>
-SUC;
-}*/
 elseif ($data === Model::SUCCESS)
 {
 	echo <<<SUC

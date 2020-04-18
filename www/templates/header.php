@@ -32,7 +32,7 @@
 				<li class="logo"><a href="/"><i class='fa fa-camera-retro'></i></a><a id="1" href="/">Kborroq's Camagru</a></li>
 				
 				<li class='item'><a href="/about">About</a></li>
-				<li class='item'><a href="/feedback">Feedback</a></li>
+				<li class='item'><a href="/feedback">Contact us</a></li>
                 <?php
         if (!isset($_SESSION['username']) and !isset($_SESSION['password']))
             {
