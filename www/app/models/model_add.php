@@ -5,7 +5,11 @@ class Model_Add extends Model
 	private static $sql_add_like = "INSERT INTO `like` (`id`, `userid`, `imageid`) VALUES (NULL, :uid, :aid)";
 	private static $sql_search_like = "SELECT * FROM `like` WHERE `imageid` = :aid AND `userid` = :uid";
 	private static $sql_del_like = "DELETE FROM `like` WHERE `imageid` = :aid AND `userid` = :uid";
-
+	private static $sql_get_profile = "SELECT `image`.`id` as aid, `user`.`id` as uid, `user`.`username`, `image`.`description` 
+                FROM `image`, `user` 
+                WHERE `user`.`id` = `image`.`userid` AND `image`.`userid` = :uid
+				ORDER BY `image`.`creationdate` DESC LIMIT 5";
+				
 	public function create_article()
 	{
 		if (($result = $this->_auth()) !== Model::SUCCESS)
@@ -29,6 +33,35 @@ class Model_Add extends Model
 		else
 			return $result;
 	}
+
+	public function get_profile()
+    {
+		if (($result = $this->_auth()) === Model::SUCCESS)
+		{
+			$id = $_SESSION['uid'];
+			include 'config/database.php';
+        try
+		{
+			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
+			$pdo->exec("USE $DB_NAME");
+			$stmt = $pdo->prepare(Model_Add::$sql_get_profile);
+			$stmt->execute(array('uid' => $id));
+			$data = $stmt->fetchAll();
+			$num = count($data);
+			if ($num === 0)
+				return Model::EMPTY_PROFILE;
+			return $data;
+		}
+		catch (PDOException $ex)
+		{
+			Route::console_log("profile");
+			return Model::DB_ERROR;
+		}
+		}
+        else{
+			return Model::INCORRECT_NICK_PASS;
+		}
+    }
 
 	public function create_article_base()
 	{

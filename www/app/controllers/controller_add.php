@@ -11,7 +11,8 @@ class Controller_Add extends Controller
 
 	public function action_index($param = null)
 	{
-		$this->view->generate(self::$view_page, Controller::$template);
+		$data = $this->model->get_profile();
+		$this->view->generate(self::$view_page, Controller::$template, $data);
 	}
 
 	public function action_like($param)

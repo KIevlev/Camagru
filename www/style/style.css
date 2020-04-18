@@ -581,10 +581,42 @@ padding-bottom: 5%;
 a {
 	color: rgb(255, 255, 255);
 }
-/*.footer {
-	flex: 0 0 auto;
+
+
+.photo1 img{
+	height: 70px;
+	width: auto;
+	padding: 5px;
 }
-*/
+
+#create_post{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#sticker_bar {
+	flex: auto;
+	display: flex;
+	flex-direction: column;
+	width: 128px;
+	}
+
+
+
+	#start_v {
+		color: black;
+}
+
+#bsubmit {
+	color: black;
+	}
+#submit{
+	color: black;
+}
+#photo_feed {
+	margin-right: 10%;
+	margin-left: 10%;
+	}
 
 .container {
 	

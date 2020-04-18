@@ -82,7 +82,6 @@ class Model_Main extends Model
 				$stmt->execute(array('aid' => $data[$i]['aid']));
 				$likes = $stmt->fetch();
 				$data[$i]['likes'] = $likes['likes'];;
-				Route::console_log($data);
 			}
 			$_SERVER['type'] = 'profile';
 			return $data;
