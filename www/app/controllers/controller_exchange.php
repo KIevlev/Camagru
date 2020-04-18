@@ -1,5 +1,5 @@
 <?php
-include "app/views/exchange_view.php";
+require "app/views/exchange_view.php";
 class Controller_Exchange extends Controller
 {
     function __construct()

@@ -93,7 +93,6 @@ class Model_Settings extends Model
 		{
 			return Model::DB_ERROR;
 		}
-
 	}
 
 	public function change_password()

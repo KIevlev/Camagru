@@ -37,7 +37,7 @@ else {
 		<section class="user-profile">
 			<img class="user-pic" width="50" height="50" src="/exchange/icon/{$data[0]['uid']}">
 			<a href="/main/profile/{$data[0]['uid']}"><p>{$data[0]['username']}</p></a>
-		
+			
 ARTICLE;
 	if (isset($_SESSION['uid']) and $_SESSION['uid'] === $data[0]['uid']) {
 		echo "<h1> </h1>";
@@ -85,7 +85,22 @@ DEL_INPUT;
 	<input style="width: 50%" name="comment" type="text" required="required" maxlength="250">
 	<input type="submit" value="Add comment" name="butt">
 </form>
+<br>
+<div class='public'>
 ADD_COMMENT;
 
-	echo "</section></div></div></div></article></main>";
+?>
+
+<script type="text/javascript">
+document.write(VK.Share.button({
+  //url: encodeURIComponent(document.location.href),
+  title: 'Amazing photo',
+  description: 'Check it out',
+  image: document.location.protocol + document.location.host + '/photos/<?php echo $data[0]['aid']; ?>' + '.jpg',
+  noparse: false,
+}, {type: "round",text: 'Опубликовать'}));
+myHeaders.append('og:image', document.location.protocol + document.location.host + '/photos/<?php echo $data[0]['aid']; ?>' + '.jpg');
+</script>
+<?php
+	echo "</div></section></div></div></div></article></main>";
 }

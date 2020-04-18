@@ -15,7 +15,7 @@ window.onload = function() {
     //document.getElementById('take_s').addEventListener('click', takepicture);
     context = canvas.getContext("2d");
     imgs = document.getElementsByTagName('img');
-    for (i = 1; i < imgs.length; i++)
+    for (i = 0; i < imgs.length; i++)
     {
         imgs[i].onclick = img_list(imgs[i].currentSrc);
     }
@@ -94,7 +94,6 @@ function _MouseEvents(stickers) {
         var mouseX = e.pageX - this.offsetLeft;
         var mouseY = e.pageY - this.offsetTop;
 
-
         if (mouseX >= (sticker.X - sticker.star_img.width/2) &&
             mouseX <= (sticker.X + sticker.star_img.width/2) &&
             mouseY >= (sticker.Y - sticker.star_img.height/2) &&
@@ -159,7 +158,7 @@ function submit() {
         form.appendChild(input);
     }
     if (source === 2)
-        document.getElementById('submit').click();
+        document.getElementById('bsubmit').click();
     else if (source === 1)
     {
         document.getElementById('upload_form').setAttribute('action', '/add/create_base/')
@@ -171,7 +170,7 @@ function submit() {
         binput.style.display = 'none';
         binput.setAttribute('value', base);
         form.appendChild(binput);
-        document.getElementById('submit').click();
+        document.getElementById('bsubmit').click();
     }
     else alert('Please, create post');
 }
