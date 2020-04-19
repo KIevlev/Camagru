@@ -65,6 +65,7 @@ class Model_Add extends Model
 
 	public function create_article_base()
 	{
+		//Route::console_log("ar_base");
 		if (($result = $this->_auth()) !== Model::SUCCESS)
 			return $result;
 		if (!isset($_POST['description']) or !isset($_POST['base_img']))
@@ -90,6 +91,9 @@ class Model_Add extends Model
 
 	private function _insert_to_table()
 	{
+		//Route::console_log("table");
+		if (($result = $this->_auth()) !== Model::SUCCESS)
+			return $result;
 		$arr = array(
 			'uid' => $_SESSION['uid'],
 			'description' => mb_strimwidth($_POST['description'], 0, 250),
@@ -113,6 +117,8 @@ class Model_Add extends Model
 
 	private function _insert_to_ftp($id)
 	{
+		if (($result = $this->_auth()) !== Model::SUCCESS)
+			return $result;
 		include "config/database.php";
 		$type = exif_imagetype($_FILES['image_upload']['tmp_name']);
 		switch ($type)
@@ -141,6 +147,9 @@ class Model_Add extends Model
 
 	private function _insert_to_ftp_base($id, $img)
 	{
+		if (($result = $this->_auth()) !== Model::SUCCESS)
+			return $result;
+		//Route::console_log("base");
 		include "config/database.php";
 		$img = imagescale($img, 640, 480);
 		if (isset($_POST['sticker0']))
@@ -154,6 +163,9 @@ class Model_Add extends Model
 
 	private function _add_stickers($img)
 	{
+		if (($result = $this->_auth()) !== Model::SUCCESS)
+			return $result;
+		//Route::console_log("stickers");
 		for ($i = 0; ; $i++)
 		{
 			if (!isset($_POST['sticker'.$i]))
@@ -200,6 +212,8 @@ class Model_Add extends Model
 
 	private function del_like($aid, $pdo)
 	{
+		if (($result = $this->_auth()) !== Model::SUCCESS)
+			return $result;
 		try
 		{
 			$stmt = $pdo->prepare(Model_Add::$sql_del_like);

@@ -59,10 +59,10 @@ else {
 	</div>
 		<div id="side_menu">
 			<div id="sticker_bar">
-				<img src="/images/Z.png">
-				<img src="/images/doggi.png">
-				<img src="/images/Mask.png">
-				<img src="/images/rick.png">
+				<img src="/images/Z.png" class='1'>
+				<img src="/images/doggi.png" class='1'>
+				<img src="/images/Mask.png" class='1'>
+				<img src="/images/rick.png" class='1'>
 				<button id="del_stick" style="display: none" onclick="delete_sticker()">DELETE STICKER</button>
 			</div>
 		</div>
@@ -72,7 +72,8 @@ else {
 MAIN;
 //print_r($data);
 //echo '</pre>';
-
+if($data !== Model::EMPTY_PROFILE)
+{
 	foreach ($data as $d)
 	{
 		echo <<<article
@@ -82,6 +83,7 @@ MAIN;
 			</section>
 article;
 	}
+}
 echo "</div></div>
 <div id ='description' style='text-align: center; color:white'>Description<br><input type='text' form='upload_form' maxlength='250'
 																					required='required' name='description'></div>

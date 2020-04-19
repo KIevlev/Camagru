@@ -33,6 +33,11 @@ class Controller_Add extends Controller
 			header("Location: /auth/");
 			exit;
 		}
+		elseif ($result === Model::NON_CONFIRMED_ACC)
+		{
+			header("Location: /auth");
+			exit();
+		}
 		else
 			$this->view->generate(self::$view_page, Controller::$template, $result);
 	}
@@ -55,6 +60,11 @@ class Controller_Add extends Controller
 			header("Location: /auth");
 			exit();
 		}
+		elseif ($result === Model::NON_CONFIRMED_ACC)
+		{
+			header("Location: /auth");
+			exit();
+		}
 		else
 			$this->view->generate(self::$view_page, Controller::$template, $result);
 	}
@@ -73,6 +83,11 @@ class Controller_Add extends Controller
 			exit();
 		}
 		elseif ($result === Model::INCOMPLETE_DATA)
+		{
+			header("Location: /auth");
+			exit();
+		}
+		elseif ($result === Model::NON_CONFIRMED_ACC)
 		{
 			header("Location: /auth");
 			exit();

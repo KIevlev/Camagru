@@ -1,7 +1,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>AJAX Form Without jQuery</title>
+	<title>feedback</title>
 	<script type="text/javascript">
 		/* Usage */
 		window.onload = function (){

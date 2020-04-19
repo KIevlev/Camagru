@@ -24,6 +24,7 @@ class Model_Auth extends Model
 				$_SESSION['password'] = $data['password'];
 				$_SESSION['uid'] = $data['id'];
 				$_SESSION['send_email'] = $data['send_email'];
+				$_SESSION['auth'] = 1;
 				return Model::SUCCESS;
 			}
 			else

@@ -34,7 +34,7 @@
 				<li class='item'><a href="/about">About</a></li>
 				<li class='item'><a href="/feedback">Contact us</a></li>
                 <?php
-        if (!isset($_SESSION['username']) and !isset($_SESSION['password']))
+        if (!isset($_SESSION['username']) or !isset($_SESSION['password']) or !isset($_SESSION['auth']))
             {
                 echo "<li class=\"item button3\"><a href='/auth'>Log In</a></li>";
 				echo "<li class=\"item button3 secondary\"><a href='/signup'>Sign In</a></li>";

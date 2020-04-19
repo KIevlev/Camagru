@@ -11,7 +11,7 @@ window.onload = function() {
     canvas = document.getElementById("canvas");
     document.getElementById('video').style.display = 'none';
     context = canvas.getContext("2d");
-    imgs = document.getElementsByTagName('img');
+    imgs = document.getElementsByClassName('1');
     for (i = 0; i < imgs.length; i++)
     {
         imgs[i].onclick = img_list(imgs[i].currentSrc);
@@ -138,6 +138,7 @@ function readURL(input) {
     document.getElementById('bsubmit').style.color = 'black';
     document.getElementById('file_up').style.display = 'none';
     document.getElementById('del_stick').style.display = 'block';
+    document.getElementById('del_stick').style.color = 'black';
     source = 2;
 }
 
@@ -168,6 +169,7 @@ function submit() {
         binput.style.display = 'none';
         binput.setAttribute('value', base);
         form.appendChild(binput);
+       // console.log('ДАЛЕЕ');
         document.getElementById('submit').click();
         //HZHZHZHZH NE MENIAL
     }
@@ -184,6 +186,7 @@ function video_to_base64()
     hcanvas = document.getElementById('hide_canv');
     hcanvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
     base = hcanvas.toDataURL();
+    //console.log('ТУТАЧКИ');
     //console.log(base);
     return base;
 }

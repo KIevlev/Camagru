@@ -25,7 +25,7 @@ elseif ($data === Model::SUCCESS)
 	<p style="text-align: center; font-size: larger">
 		You have successfully created an account! Now, check you email address and confirm account.
 	</p>
-	<a href="/main" class="button_1" >Return to main page</a></div>
+	<a href="/main" class="button_2" >Return to main page</a></div>
 	</div>
 	</div>
 SUC;

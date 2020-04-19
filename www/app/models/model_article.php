@@ -84,14 +84,29 @@ class Model_Article extends Model
 		include 'config/database.php';
 		if ($confirmed === 0)
 			return;
-		$subject = "You have comments, sweetie";
-		$main = "Hello, $nickname! Somebody left a comment under your post! Check it out! http://".
-			$email_host."/article/index/".$aid;
-		$main = wordwrap($main, 65, "\r\n");
-		$headers = 'From: Kika.Ievlev@yandex.ru'."\r\n".
-			"Reply-To: Kika.Ievlev@yandex.ru"."\r\n".
-			"X-Mailer: PHP/".phpversion();
-		mail($email, $subject, $main, $headers);
+		$subject = "You have comments in Camagru!";
+			$msg = '<html>
+			<head>
+			  <title>Hey! You have comments in Camagru!</title>
+			</head>
+			<body>
+			  <p>Hello, '.$nickname.'!</p>
+			  <p> Somebody left a comment under your post! Check it out!<p>
+			  <p><a href="http://localhost:8080/article/index/'.$aid.'">LINK</a></p>
+			</body>
+			</html>';
+			$msg = wordwrap($msg,70, "\r\n");
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'From: Kika.Ievlev@yandex.ru'."\r\n".
+						'Reply-To: Kika.Ievlev@yandex.ru' . "\r\n" .
+						"X-Mailer: PHP/".phpversion();
+			if (! empty($_POST)) {
+				if (!mail($email, $subject, $msg, $headers))
+		{
+			return Model::DB_ERROR;
+		}
+			}
 	}
 
 	public function delete_post($aid)

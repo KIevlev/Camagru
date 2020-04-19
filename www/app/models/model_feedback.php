@@ -12,12 +12,10 @@ class Model_Feedback extends Model
     if( isset($_POST['message']) and !empty($_POST['message']) )
     {
         if(!isset($_SESSION['username'])){
-
             // Sanitise data
             $name = htmlspecialchars($_POST['name']);
             $email = $_POST['email'];
             $message = htmlspecialchars($_POST['message']);
-           
             self::send_mail($name, $email, $message);
             exit();
     }

@@ -84,13 +84,27 @@ class Model_Forgotten extends Model
 	{
 		include 'config/database.php';
 		$subject = "Password recovery in Camagru";
-		$main = "You, or not good dude trying recovery password. If is you, click here: http://".
-			$email_host."/forgotten/recovery/".$sid;
-		$main = wordwrap($main, 60, "\r\n");
-		$headers = 'From: Kika.Ievlev@yandex.ru'."\r\n".
-			"Reply-To: Kika.Ievlev@yandex.ru"."\r\n".
+$msg = '<html>
+<head>
+  <title>Password recovery in Camagru</title>
+</head>
+<body>
+  <p> You try to recover password. Please, click here: <p>
+  <p><a href="http://localhost:8080/forgotten/recovery/'.$sid.'">LINK</a></p>
+</body>
+</html>';
+$msg = wordwrap($msg,70, "\r\n");
+$headers = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= 'From: Kika.Ievlev@yandex.ru'."\r\n".
+			'Reply-To: Kika.Ievlev@yandex.ru' . "\r\n" .
 			"X-Mailer: PHP/".phpversion();
-		if (mail($email, $subject, $main, $headers))
-		return Model::SUCCESS;
-	}
+			if (! empty($_POST)) {
+				if (!mail($email, $subject, $msg, $headers))
+		{
+			return Model::DB_ERROR;
+		}
+			}
+		
+    }
 }

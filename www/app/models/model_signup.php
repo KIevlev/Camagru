@@ -131,7 +131,7 @@ $msg = '<html>
 </html>';
 $msg = wordwrap($msg,70, "\r\n");
 // send email
-mail($email,$subject,$msg);
+//mail($email,$subject,$msg);
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: Kika.Ievlev@yandex.ru'."\r\n".

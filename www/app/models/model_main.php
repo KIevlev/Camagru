@@ -31,6 +31,10 @@ class Model_Main extends Model
 			$data = $stmt->fetchAll();
 			if (count($data) < 5)
 				$_SERVER['last'] = true;
+				if (count($data) < 1)
+				{
+					return Model::EMPTY_PROFILE;
+				}
 				$stmt = $pdo->prepare(Model_Main::$sql_get_likes);
 				for ($i = 0; $i < count($data); $i++)
 				{
