@@ -1,11 +1,10 @@
 <?php
-define('PER_PAGE', 5);
 class Model_Main extends Model
 {
 	private static $sql_get_image = "SELECT `image`.`id` as aid, `user`.`id` as uid, `user`.`username`, `image`.`description` 
                 FROM `image`, `user` 
                 WHERE `user`.`id` = `image`.`userid` 
-                ORDER BY `image`.`creationdate` DESC LIMIT ?, ?";
+                ORDER BY `image`.`creationdate` DESC LIMIT 5 OFFSET ?";
 	private static $sql_get_profile = "SELECT `image`.`id` as aid, `user`.`id` as uid, `user`.`username`, `image`.`description` 
                 FROM `image`, `user` 
                 WHERE `user`.`id` = `image`.`userid` AND `image`.`userid` = :uid
@@ -22,17 +21,17 @@ class Model_Main extends Model
 			$pdo = new PDO($DB_DNS_L, $DB_USER, $DB_PASSWORD, $DB_OPTS);
 			$pdo->exec("USE $DB_NAME");
 			$stmt= $pdo->prepare(Model_Main::$sql_get_image);
-			// FETCH CONTENTS
-			if (!isset($_POST['page']))
-				$_POST['page'] = 1;
-			$page = $_POST['page'];
-			$start = ($page-1) * PER_PAGE;
-				$end = $start + PER_PAGE;
-				$stmt->execute(array($start, $end));
+			if (!isset($_GET['page']) or $_GET['page'] < 2)
+			{
+				$stmt->execute(array(0));
+				$_SERVER['first'] = true;
+			}
+			else
+				$stmt->execute(array(($_GET['page'] - 1) * 5));
 			$data = $stmt->fetchAll();
-			if (count($data) < PER_PAGE)
+			if (count($data) < 5)
 				$_SERVER['last'] = true;
-			$stmt = $pdo->prepare(Model_Main::$sql_get_likes);
+				$stmt = $pdo->prepare(Model_Main::$sql_get_likes);
 				for ($i = 0; $i < count($data); $i++)
 				{
 					$stmt->execute(array('aid' => $data[$i]['aid']));
@@ -76,12 +75,14 @@ class Model_Main extends Model
 			$num = $stmt->fetch();
 			if ($num['num'] == 5)
 				$_SERVER['last'] = true;
+
 			$stmt = $pdo->prepare(Model_Main::$sql_get_likes);
 			for ($i = 0; $i < count($data); $i++)
 			{
 				$stmt->execute(array('aid' => $data[$i]['aid']));
 				$likes = $stmt->fetch();
 				$data[$i]['likes'] = $likes['likes'];;
+				Route::console_log($data);
 			}
 			$_SERVER['type'] = 'profile';
 			return $data;

@@ -61,27 +61,49 @@ article;
 		$type = 'index/';
 	else
 		$type = 'profile/' . $uid;
-	if (isset($_POST['page']))
+	if (isset($_GET['page']))
 	{
-
+		if (!isset($_SERVER['first']))
+		{
+			$prev_page = $_GET['page'] - 1;
+			echo "<div class='navipage'></div>";
+			echo "<div class='navipage1'><a href='/main/$type?page=$prev_page'><button><i class='fa fa-caret-square-o-left' style='font-size:24px'></i></button></a></div>";
+			echo "<div class='navipage'></div>";
+		} else
+		{
+			echo "<div class='navipage'></div>";
+			echo "<div class='navipage1'><a href='#'><button><i class='fa fa-caret-square-o-up' style='font-size:24px'></i></button></a></div>";
+			echo "<div class='navipage'></div>";
+		}
 		if (!isset($_SERVER['last']))
 		{
-			echo "<div id='page-loading'><img id='pag' src='/images/pag.gif' style='visibility:hidden'></div>";
-		} 
+			$next_page = $_GET['page'] + 1;
+			echo "<div class='navipage1'><a href='/main/$type?page=$next_page'><button><i class='fa fa-caret-square-o-right' style='font-size:24px'></i></button></a></div>";
+			echo "<div class='navipage'></div>";
+		} else
+		{
+			echo "<div class='navipage1'><a href='#'><button><i class='fa fa-caret-square-o-up' style='font-size:24px'></i></button></a></div>";
+			echo "<div class='navipage'></div>";
+		}
 	} else
 	{
 		if (!isset($_SERVER['last']))
 		{
-			echo "<div id='page-loading'><img id='pag' src='/images/pag.gif' style='visibility:hidden'></div>";
-			
-
+			echo "<div class='navipage'></div>";
+			echo "<div class='navipage1'><a href='#'><button><i class='fa fa-caret-square-o-up' style='font-size:24px'></i></button></a></div>";
+			echo "<div class='navipage'></div>";
+			echo "<div class='navipage1'><a href='/main/$type?page=2'><button><i class='fa fa-caret-square-o-right' style='font-size:24px'></i>︎</button></a></div>";
+			echo "<div class='navipage'></div>";
 		} else
 		{
-			echo "ALL POSTS";
+			echo "<div class='navipage'></div>";
+			echo "<div class='navipage1'><a href='#'><button><i class='fa fa-caret-square-o-up' style='font-size:24px'></i></button></a></div>";
+			echo "<div class='navipage'></div>";
+			echo "<div class='navipage1'><a href='#'><button><i class='fa fa-caret-square-o-up' style='font-size:24px'></i></button></a></div>";
+			echo "<div class='navipage'></div>";
 		}
 	}
 	echo "</div>";
-	
 }
 
 ?>

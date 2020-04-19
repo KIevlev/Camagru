@@ -59,9 +59,10 @@ else {
 	</div>
 		<div id="side_menu">
 			<div id="sticker_bar">
-				<img src="/images/ricardo.png">
+				<img src="/images/Z.png">
 				<img src="/images/doggi.png">
-				<img src="/images/benis.png">
+				<img src="/images/Mask.png">
+				<img src="/images/rick.png">
 				<button id="del_stick" style="display: none" onclick="delete_sticker()">DELETE STICKER</button>
 			</div>
 		</div>
@@ -82,7 +83,7 @@ MAIN;
 article;
 	}
 echo "</div></div>
-<div id ='description' style='text-align: center'>Description<br><input type='text' form='upload_form' maxlength='250'
+<div id ='description' style='text-align: center; color:white'>Description<br><input type='text' form='upload_form' maxlength='250'
 																					required='required' name='description'></div>
 				<input style='display: none' id='submit' type='submit' form='upload_form'>
 				<button id='start_v'>START VIDEO</button>
@@ -90,4 +91,3 @@ echo "</div></div>
 			</div>
 <canvas id='hide_canv' style='display: none' width='640' height='480'></canvas>";
 }
-	

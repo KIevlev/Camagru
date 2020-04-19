@@ -12,7 +12,17 @@ html{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.7);
+    /*background-color: rgba(0, 0, 0, 0.7);*/
+}
+
+.fa-caret-square-o-up{
+    color: #3498db;
+}
+.fa-caret-square-o-right{
+    color: #3498db;
+}
+.fa-caret-square-o-left{
+    color: #3498db;
 }
 
 .box_main{

@@ -29,7 +29,6 @@ elseif ($data === Model::NON_CONFIRMED_ACC)
 NCA;
 else {
 	echo <<<ARTICLE
-	<main>
 	<article class="post">
 	<div class="wrapper">
 	<div class="content">
@@ -99,7 +98,7 @@ document.write(VK.Share.button({
   image: document.location.protocol + document.location.host + '/photos/<?php echo $data[0]['aid']; ?>' + '.jpg',
   noparse: false,
 }, {type: "round",text: 'Опубликовать'}));
-myHeaders.append('og:image', document.location.protocol + document.location.host + '/photos/<?php echo $data[0]['aid']; ?>' + '.jpg');
+//myHeaders.append('og:image', document.location.protocol + document.location.host + '/photos/<?php //echo $data[0]['aid']; ?>' + '.jpg');
 </script>
 <?php
 	echo "</div></section></div></div></div></article></main>";

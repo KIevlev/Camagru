@@ -76,6 +76,14 @@
 	max-width: 30px;
   }
 
+  .wrapper {
+
+	margin: 0 5%;
+	background-color: transparent;
+	padding-bottom: 5%;
+	
+}
+
   #\31 {
 	  visibility: hidden;
 	  font-size: 1px;
@@ -144,7 +152,6 @@ div.col-4:nth-child(1) {
 				.pag{
 					width: 100%;
 					display: inline-flex;  
-					background-color: rgba(0, 0, 0, 0.7); 
 				}
   /* Navbar Toggle */
   .toggle {
@@ -185,6 +192,14 @@ div.col-4:nth-child(1) {
 		font-size: 16px;
 		padding: 5px 5px;
 		white-space: nowrap;
+	}
+
+	.wrapper {
+
+		margin: 0 5%;
+		background-color: #34495e;
+		padding-bottom: 5%;
+		
 	}
 
 	.logo {
@@ -240,8 +255,7 @@ div.col-4:nth-child(1) {
 	  }
 	.pag{
 		width: 100%;
-		display: inline-flex;  
-		background-color: rgba(0, 0, 0, 0.7); 
+		display: inline-flex;   
 	}
 
 	.el{
@@ -301,6 +315,14 @@ div.col-4:nth-child(1) {
 
 	}
 
+	.wrapper {
+
+		margin: 0 5%;
+		background: #34495e;
+		padding-bottom: 5%;
+		border-radius: 5px;
+	}
+
 	.user-pic {
 		max-width: 50px;
 	  }
@@ -321,8 +343,7 @@ div.col-4:nth-child(1) {
 		padding-right: 0;
 	}
 	.box{
-		margin-left: 28%;
-		width: 32%;
+		width: 50%;
 		height: auto;
 		}
 		div.col-4:nth-child(1) {
@@ -375,6 +396,7 @@ html{
 }
 .content {
 	flex: 1 0 auto;
+	padding-top: 10px;
 	/*height: 80%;*/
 }
 
@@ -448,6 +470,7 @@ ul{
 main {
 	/* Чтобы занимал оставшееся пространство */
 	flex-grow: 1;
+		background-color: rgba(0, 0, 0, 0.7);
   }
 
 .box{
@@ -531,6 +554,13 @@ width: 75%;
 	padding-top: 3px;
 }
 
+#h{
+	width: 50%;
+	margin-left: 22%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
 .add{
 	display: block;
 	text-align: center;
@@ -547,13 +577,7 @@ body, html {
 	height: 100%;
 	background: #34495e;
 }
-.wrapper {
 
-	margin: 0 5%;
-	background: #34495e;
-	padding-bottom: 5%;
-	
-}
 .content {
 	flex: 1 0 auto;
 }
@@ -601,7 +625,11 @@ a {
 	width: 128px;
 	}
 
-
+.navipage{
+	display: flex;
+	flex: 1 0;
+	display: inline;
+}
 
 	#start_v {
 		color: black;

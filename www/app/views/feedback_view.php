@@ -15,7 +15,7 @@
     {
         echo <<< T
         <div id="h" class="wrapper">
-	<div id="h" class="content">
+	    <div id="h1" class="content">
         <form class="box" action="/feedback" id="my-form">
         <p> your name: </p> <input type="text" name="name" value="{$_SESSION['username']}" placeholder="your name" required>
         <textarea id="message" name="message" rows="4" cols="35" placeholder="Enter your message here..." required></textarea>
@@ -27,7 +27,7 @@ T;
     {
         echo <<< T
         <div class="wrapper" id="h">
-	<div class="content" id="h">
+	<div class="content" id="h1">
     <form class="box" action="/feedback" id="my-form">
         <input type="text" name="name" value="" placeholder="your name" required>
         <input type="email" name="email" value="" placeholder="some@email.com" required>

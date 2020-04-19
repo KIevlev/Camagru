@@ -50,13 +50,13 @@ function start_camera() {
     document.getElementById('bsubmit').style.display = 'block';
     document.getElementById('start_v').style.display = 'none';
     document.getElementById('del_stick').style.display = 'block';
+    document.getElementById('del_stick').style.color = 'black';
     source = 1;
 }
 
 function edit_photo(stickers) {
     _Go(stickers);
 }
-
 function _Go(stickers) {
     _MouseEvents(stickers);
     if (isVideo) {
@@ -184,6 +184,6 @@ function video_to_base64()
     hcanvas = document.getElementById('hide_canv');
     hcanvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
     base = hcanvas.toDataURL();
-    console.log(base);
+    //console.log(base);
     return base;
 }

@@ -18,9 +18,9 @@
 							<div class="col-4">
 								<p class="footer__social">My profiles</p>
 								<p class="footer__social-icons">
-									<a href="#" class="fa fa-facebook"></a>
-									<a href="#" class="fa fa-linkedin"></a>
-									<a href="#" class="fa fa-skype"></a>
+									<a href="https://facebook.com/profile.php?id=100009548903100" class="fa fa-facebook"></a>
+									<a href="https://www.linkedin.com/in/kirill-ievlev" class="fa fa-linkedin"></a>
+									<a href="https://vk.com/id81920737" class="fa fa-vk"></a>
 								</p>
 							</div>
 							<div class="col-4">
